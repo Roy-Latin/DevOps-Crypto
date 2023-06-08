@@ -73,11 +73,26 @@
     }
     
     .content {
-      font-size: 0.8rem;
+      position: fixed;
+      top: 68%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 2;
       text-align: center;
-      font-family: Arial, sans-serif;   
-    } 
+      font-size: 0.5rem;
+      font-family: Arial, sans-serif;
+    }
+
+    .price {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      text-align: center;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+    }
     
     .maintitle1 {
       position: absolute;
@@ -159,6 +174,9 @@
   </div>
   <div class="content">
     <h1>Choose A Crypto Currency</h1>
+  </div>
+
+  <div class="price">
     <h1>Bitcoin Price: {{ bitcoin_price }}</h1>
   </div>
 

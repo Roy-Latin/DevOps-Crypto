@@ -1,156 +1,170 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-body {
-  background-image: url('https://images.hdqwalls.com/download/gradient-noise-8k-ws-3840x2400.jpg');
-  background-size: cover;
-  background-position: middle;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  color: white;
-}
-        
-code {
-  display: inline-block;
-  padding: 3px 6px;
-  margin-left: 3px;
-  margin-right: 3px;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  background: #1a2279;
-  color: #dbf1f5;
-}
-.button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  top: 80%; /* Adjust the vertical position */
-  left: 50%; /* Adjust the horizontal position */
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-button {
-  width: 200px; /* set a fixed width */
-  height: 50px; /* set a fixed height */
-  position: relative;
-  display: inline-block;
-  margin: 10px;
-  text-align: center;
-  font-size: 18px;
-  letter-spacing: 1px;
-  text-decoration: none;
-  color: #ffffff;
-  background: transparent;
-  cursor: pointer;
-  transition: ease-out 0.5s;
-  border: 2px solid #725AC1;
-  border-radius: 10px;
-  box-shadow: inset 0 0 0 0 #725AC1;
-}
-button a {
-  text-decoration: none; /* remove underline */
-  color: inherit; /* inherit text color from parent */
-  cursor: inherit; /* inherit cursor style from parent */
-}
+  <style>
+    body {
+      background-image: url('https://images.hdqwalls.com/download/gradient-noise-8k-ws-3840x2400.jpg');
+      background-size: cover;
+      background-position: middle;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+            
+    code {
+      display: inline-block;
+      padding: 3px 6px;
+      margin-left: 3px;
+      margin-right: 3px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      background: #1a2279;
+      color: #dbf1f5;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      top: 80%; /* Adjust the vertical position */
+      left: 50%; /* Adjust the horizontal position */
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    button {
+      width: 200px; /* set a fixed width */
+      height: 50px; /* set a fixed height */
+      position: relative;
+      display: inline-block;
+      margin: 10px;
+      text-align: center;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: #ffffff;
+      background: transparent;
+      cursor: pointer;
+      transition: ease-out 0.5s;
+      border: 2px solid #725AC1;
+      border-radius: 10px;
+      box-shadow: inset 0 0 0 0 #725AC1;
+    }
+    button a {
+      text-decoration: none; /* remove underline */
+      color: inherit; /* inherit text color from parent */
+      cursor: inherit; /* inherit cursor style from parent */
+    }
+    
+    button:hover {
+      color: white;
+      box-shadow: inset 0 -100px 0 0 #725AC1;
+    }
+    
+    button:active {
+      transform: scale(0.9);
+    }
+    
+    .container {
+      padding: 100px;
+      max-width: 800px;
+      margin: 0 auto;
+      color: white;
+    }
+    
+    .content {
+      position: fixed;
+      top: 68%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      text-align: center;
+      font-size: 0.5rem;
+      font-family: Arial, sans-serif;
+    }
 
-button:hover {
-  color: white;
-  box-shadow: inset 0 -100px 0 0 #725AC1;
-}
-
-button:active {
-  transform: scale(0.9);
-}
-
-.container {
-  padding: 100px;
-  max-width: 800px;
-  margin: 0 auto;
-  color: white;
-}
-
-.content {
-  font-size: 0.8rem;
-  z-index: 2;
-  text-align: center;
-  font-family: Arial, sans-serif;   
-} 
-
-.maintitle1 {
-  position: absolute;
-  top: 10px; /* Adjust the value as needed */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  text-align: center;
-  font-size: 3rem;
-  font-family: Arial, sans-serif;
-  text-shadow: -1px 1px 2px #000,
-      1px 2px 6px #000,
-      1px -1px 0 #000,
-      -1px -1px 0 #000; 
-}
-       
-.card {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 90%;
-  opacity: 0.8;
-  backdrop-filter: blur(10px);
-  background: #07182E;
-  display: flex;
-  place-content: center;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 20px;
-  z-index: -1;
-}
-
-.card h2 {
-  z-index: 1;
-  color: white;
-  font-size: 2em;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  width: 100px;
-  background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
-  height: 1300%;
-  animation: rotBGimg 3s linear infinite;
-  transition: all 0.2s linear;
-}
-
-@keyframes rotBGimg {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.card::after {
-  content: '';
-  position: absolute;
-  background: #07182E;
-  ;
-  inset: 5px;
-  border-radius: 15px;
-}  
-
-
-
-</style>
-
+    .price {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      text-align: center;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+    }
+    
+    .maintitle1 {
+      position: absolute;
+      top: 10px; /* Adjust the value as needed */
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      text-align: center;
+      font-size: 3rem;
+      font-family: Arial, sans-serif;
+      text-shadow: -1px 1px 2px #000,
+          1px 2px 6px #000,
+          1px -1px 0 #000,
+          -1px -1px 0 #000; 
+    }
+           
+    .card {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      height: 90%;
+      opacity: 0.8;
+      backdrop-filter: blur(10px);
+      background: #07182E;
+      display: flex;
+      place-content: center;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 20px;
+      z-index: -1;
+    }
+    
+    .card h2 {
+      z-index: 1;
+      color: white;
+      font-size: 2em;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      width: 100px;
+      background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+      height: 1300%;
+      animation: rotBGimg 3s linear infinite;
+      transition: all 0.2s linear;
+    }
+    
+    @keyframes rotBGimg {
+      from {
+        transform: rotate(0deg);
+      }
+    
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .card::after {
+      content: '';
+      position: absolute;
+      background: #07182E;
+      ;
+      inset: 5px;
+      border-radius: 15px;
+    }  
+    
+    
+    
+    </style>
 </head>
 
 <body>
