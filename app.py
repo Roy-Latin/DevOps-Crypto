@@ -14,7 +14,7 @@ def eth():
     # Make a GET request to the CoinDesk API
     eth_response = requests.get("https://api.coingecko.com/api/v3/coins/")
 
-    # Extract the Ethereum price from the API response and get prices
+    # Extract the Ethereum price from the API response
     if eth_response.status_code == 200:
         eth_data = eth_response.json()
         eth_price = eth_data[1]["market_data"]["current_price"]["usd"]
