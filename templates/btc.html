@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html>
+  
 <head>
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
 </head>
-
 <body>
   <div class="container"></div>
   <div class="maintitle1">
     <h1>Crypto Prices</h1>
   </div>
-  <div class="content">
-    <h1>Choose A Crypto Currency</h1>
+
+  <div class="container-a">
+    <div class="grey-square-a">
+      <div class="price-a">
+        <h1>Bitcoin Price</h1>
+        <h1>{{ bitcoin_price }}$</h1>
+      </div>
+    </div>
   </div>
 
-  <div class="price">
-    <h1>Bitcoin Price :{{ bitcoin_price }}$</h1>
-    <h1>Bitcoin Price high 24 hours :{{ bitcoin_price_h24 }}$</h1>
-    <h1>Bitcoin Price low 24 hours :{{ bitcoin_price_l24 }}$</h1>
+  <div class="container-b">
+    <div class="grey-square-b">
+      <div class="price-a">
+        <h1>Bitcoin Price low 24 hours:</h1>
+        <h1>{{ bitcoin_price_l24 }}$</h1>
+      </div>
+    </div>
   </div>
+
+  <div class="container-b">
+    <div class="grey-square-c">
+      <div class="price-a">
+        <h1>Bitcoin Price high 24 hours:</h1>
+        <h1>{{ bitcoin_price_h24 }}$</h1>
+      </div>
+    </div>
+  </div>
+  
 
   <div class="button-container">
     <a href="/eth" rel="noopener noreferrer">
@@ -28,6 +47,16 @@
     <a href="/btc" rel="noopener noreferrer">
       <button>
         <strong>Bitcoin</strong>
+      </button>
+    </a>
+    <a href="/xrp" rel="noopener noreferrer">
+      <button>
+        <strong>Ripple</strong>
+      </button>
+    </a>
+    <a href="/ada" rel="noopener noreferrer">
+      <button>
+        <strong>Cardano</strong>
       </button>
     </a>
   </div>

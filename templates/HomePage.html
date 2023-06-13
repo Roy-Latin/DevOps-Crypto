@@ -3,16 +3,20 @@
 <head>
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
 </head>
-
 <body>
   <div class="container"></div>
   <div class="maintitle1">
     <h1>Crypto Prices</h1>
   </div>
-  <div class="content">
-      <h1>Choose A Crypto Currency</h1>
-  </div>
 
+  <div class="content">
+    <div class="welcomebox">
+    <h1>Welcome to the crypto prices site!</h1>
+    <h1>in this site you can check the current price</h1>
+    <h1>and the highest and lowest price in the last 24h</h1>
+    <h1>to start pick a curreny from below</h1>
+  </div>
+  </div>
 
 </div>
 <div class="button-container">
@@ -24,6 +28,16 @@
   <a href="/btc" rel="noopener noreferrer">
     <button>
       <strong>Bitcoin</strong>
+    </button>
+  </a>
+  <a href="/xrp" rel="noopener noreferrer">
+    <button>
+      <strong>Ripple</strong>
+    </button>
+  </a>
+  <a href="/ada" rel="noopener noreferrer">
+    <button>
+      <strong>Cardano</strong>
     </button>
   </a>
 </div>
