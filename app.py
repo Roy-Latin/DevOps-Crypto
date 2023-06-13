@@ -27,20 +27,50 @@ def eth():
 @app.route("/btc")
 def btc():
     # Make a GET request to the CoinDesk API
-    btc_response = requests.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order_by=market_cap&per_page=1")
+    btc_response = requests.get("https://api.coingecko.com/api/v3/coins/")
     
     # Extract the Bitcoin price from the API response
     if btc_response.status_code == 200:
         btc_data = btc_response.json()
-        bitcoin_price = btc_data[0]["current_price"]
-        bitcoin_price_h24 = btc_data[0]["high_24h"]
-        bitcoin_price_l24 = btc_data[0]["low_24h"]
+        bitcoin_price = btc_data[0]["market_data"]["current_price"]["usd"]
+        bitcoin_price_h24 = btc_data[0]["market_data"]["high_24h"]["usd"]
+        bitcoin_price_l24 = btc_data[0]["market_data"]["low_24h"]["usd"]
 
 
     # Pass the Bitcoin price data to the template
     return render_template("btc.html", bitcoin_price=bitcoin_price, bitcoin_price_h24=bitcoin_price_h24, bitcoin_price_l24=bitcoin_price_l24)
 
+@app.route("/xrp")
+def xrp():
+    # Make a GET request to the CoinDesk API
+    xrp_response = requests.get("https://api.coingecko.com/api/v3/coins/")
+    
+    # Extract the xrp price from the API response
+    if xrp_response.status_code == 200:
+        xrp_data = xrp_response.json()
+        xrp_price = xrp_data[5]["market_data"]["current_price"]["usd"]
+        xrp_price_h24 = xrp_data[5]["market_data"]["high_24h"]["usd"]
+        xrp_price_l24 = xrp_data[5]["market_data"]["low_24h"]["usd"]
 
+
+    # Pass the xrp price data to the template
+    return render_template("xrp.html", xrp_price=xrp_price, xrp_price_h24=xrp_price_h24, xrp_price_l24=xrp_price_l24)
+
+@app.route("/ada")
+def ada():
+    # Make a GET request to the CoinDesk API
+    ada_response = requests.get("https://api.coingecko.com/api/v3/coins/")
+    
+    # Extract the ada price from the API response
+    if ada_response.status_code == 200:
+        ada_data = ada_response.json()
+        ada_price = ada_data[7]["market_data"]["current_price"]["usd"]
+        ada_price_h24 = ada_data[7]["market_data"]["high_24h"]["usd"]
+        ada_price_l24 = ada_data[7]["market_data"]["low_24h"]["usd"]
+
+
+    # Pass the adan price data to the template
+    return render_template("ada.html", ada_price=ada_price, ada_price_h24=ada_price_h24, ada_price_l24=ada_price_l24)
 
 if __name__ == '__main__':
     app.run()

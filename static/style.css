@@ -1,4 +1,3 @@
-
 body {
   background-image: url('https://images.hdqwalls.com/download/gradient-noise-8k-ws-3840x2400.jpg');
   background-size: cover;
@@ -19,9 +18,66 @@ code {
   background: #1a2279;
   color: #dbf1f5;
 }
+
+.container-a {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.grey-square-a {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  width: 250px;
+  height: 250px;
+  background: #212429;
+ box-shadow: 5px 5px 30px rgb(36, 36, 36),
+             -5px -5px 30px rgb(36, 36, 36);
+}
+
+
+.grey-square-b {
+  position: fixed;
+  top: 45%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  width: 250px;
+  height: 250px;
+  background: #212429;
+ box-shadow: 5px 5px 30px rgb(36, 36, 36),
+             -5px -5px 30px rgb(36, 36, 36);
+}
+
+.grey-square-c {
+  position: fixed;
+  top: 45%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  width: 250px;
+  height: 250px;
+  background: #212429;
+ box-shadow: 5px 5px 30px rgb(36, 36, 36),
+             -5px -5px 30px rgb(36, 36, 36);
+}
+
+.price-a {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  font-size: 0.85rem;
+  font-family: Arial, sans-serif;
+}
+
 .button-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   position: fixed;
   top: 80%; /* Adjust the vertical position */
@@ -63,39 +119,16 @@ button:active {
 }
 
 .container {
-  padding: 100px;
-  max-width: 800px;
-  margin: 0 auto;
-  color: white;
-}
-
-.content {
-  position: fixed;
-  top: 68%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  text-align: center;
-  font-size: 0.5rem;
-  font-family: Arial, sans-serif;
-}
-
-.price {
-  position: fixed;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  text-align: center;
-  font-size: 1rem;
-  font-family: Arial, sans-serif;
+  position: relative;
+  width: 100%;
+  height: 1vh;
 }
 
 .maintitle1 {
-  position: absolute;
-  top: 10px; /* Adjust the value as needed */
+  position: fixed;
+  top: 100px; /* Adjust the value as needed */
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
   font-size: 3rem;
@@ -104,6 +137,30 @@ button:active {
       1px 2px 6px #000,
       1px -1px 0 #000,
       -1px -1px 0 #000; 
+}
+
+.welcomebox {
+  position: fixed;
+  top: -25px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  width: 600px;
+  height: 250px;
+  background: #212429;
+ box-shadow: 5px 5px 30px rgb(36, 36, 36),
+             -5px -5px 30px rgb(36, 36, 36);
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  font-size: 0.8rem;
+  font-family: Arial, sans-serif;
 }
        
 .card {
@@ -157,6 +214,4 @@ button:active {
   ;
   inset: 5px;
   border-radius: 15px;
-}  
-
-
+} 
