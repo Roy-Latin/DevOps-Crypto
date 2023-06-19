@@ -36,7 +36,7 @@ pipeline {
         
         stage('check for the connection'){
             steps {
-                sh 'ssh -i /var/lib/jenkins/key.pem ec2-user@${EC2_IP}'
+                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@${EC2_IP}'
             }
         }
         
