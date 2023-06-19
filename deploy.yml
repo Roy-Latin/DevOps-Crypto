@@ -1,0 +1,17 @@
+- name: Run the application
+  hosts: all
+  become: true
+  tasks:
+    - name: Reload systemd daemon
+      become: true
+      command: sudo systemctl daemon-reload
+
+    - name: Restart service
+      systemd:
+        name: flaskapp.service
+        state: restarted
+
+    - name: Enable service
+      systemd:
+        name: flaskapp.service
+        enabled: yes
