@@ -66,15 +66,6 @@ pipeline {
     }
 }
 
-
-        
-    // stage('Test') {
-      //      steps {
-       //         sh 'echo "Testing..."'
-         //       sh 'echo "Provisioning a new instance..."'
-           //     sh 'ansible-playbook -i /var/lib/jenkins/workspace/playbook/inventory.ini /var/lib/jenkins/workspace/playbook/deploy.yml'
-            //}
-        //}
         
         stage('Deploy') {
             steps {
