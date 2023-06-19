@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 User=ec2-user
-WorkingDirectory=/home/ec2-user/Git
+WorkingDirectory=/home/ec2-user/DevOps-Crypto
 ExecStart=gunicorn --bind 0.0.0.0:5000 app:app &
 Restart=always
 
