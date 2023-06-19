@@ -60,6 +60,7 @@ pipeline {
                     ansible-playbook DevOps-Crypto/deploy.yml
                     '
                     """
+                    sh '/var/lib/jenkins/workspace/tests.sh'
                 }
             }
         }
