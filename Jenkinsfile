@@ -86,7 +86,7 @@ pipeline {
             steps {
                 sh 'echo "Deploying..."'
                 sh 'echo "Running the artifact on the new instance..."'
-                sh 'ansible-playbook -i /var/lib/jenkins/workspace/playbook/inventory.ini /var/lib/jenkins/workspace/playbook/run.yml'
+                sh 'ansible-playbook -i DevOps-Crypto/deploy.yml'
             }
         }
     }
