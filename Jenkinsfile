@@ -2,6 +2,7 @@ pipeline {
     agent any
         environment {
         EC2_IP_TEST = "18.212.98.180"
+        EC2_IP_MAIN = "52.91.86.112"
     }
 
     stages {
@@ -28,6 +29,8 @@ pipeline {
         stage('check for the connection'){
             steps {
                 sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@$EC2_IP_TEST'
+                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@$EC2_IP_MAIN'
+
             }
         }
         
@@ -42,9 +45,8 @@ pipeline {
     }
 }
 
-        stage('Setting Up The Test Server') {
+        stage('Setting Up The Test Server And Running Checks') {
             steps {
-                sh 'pwd'
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
                     sshagent(['aws-key-ssh']) {
@@ -61,6 +63,7 @@ pipeline {
                     '
                     """
                     sh '/var/lib/jenkins/workspace/tests.sh'
+
                 }
             }
         }
@@ -68,14 +71,22 @@ pipeline {
 }
 
         
-        stage('Deploy') {
+        stage('Deploying On Main Server') {
             steps {
                 sh 'echo "Deploying..."'
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
+                    sh 'scp -i /var/lib/jenkins/key.pem /var/lib/jenkins/workspace/crypto.tar.gz ec2-user@$EC2_IP_MAIN:/home/ec2-user'
                     sshagent(['aws-key-ssh']) {
                     sh """ 
-                    ssh -i $KEY_FILE ec2-user@$EC2_IP '
+                    ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_MAIN '
+                    tar -xvf /home/ec2-user/crypto.tar.gz
+                    rm -r crypto.tar.gz
+                    sudo yum install python -y
+                    sudo yum install python-pip -y
+                    sudo pip install ansible
+                    chmod +x DevOps-Crypto/tests.sh
+                    ansible-playbook DevOps-Crypto/requirements.yml
                     ansible-playbook DevOps-Crypto/deploy.yml
                     '
                     """
