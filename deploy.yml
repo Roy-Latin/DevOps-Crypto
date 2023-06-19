@@ -1,5 +1,5 @@
 - name: Run the application
-  hosts: all
+  hosts: localhost
   become: true
   tasks:
     - name: Reload systemd daemon
