@@ -90,7 +90,7 @@ pipeline {
                     sshagent(['aws-key-ssh']) {
                     sh """ 
                     ssh -i $KEY_FILE ec2-user@${EC2_IP} '
-                    ansible-playbook -i DevOps-Crypto/deploy.yml
+                    ansible-playbook DevOps-Crypto/deploy.yml
                     '
                     """
                 }
