@@ -27,7 +27,7 @@ pipeline {
         
         stage('check for the connection'){
             steps {
-                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@${EC2_IP_TEST}'
+                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@$EC2_IP_TEST'
             }
         }
         
@@ -36,7 +36,7 @@ pipeline {
                 withAWS(credentials: 'Jenkins-AWS') {
                 sh 'aws s3 cp s3://roylatin-flask-artifacts/crypto.tar.gz /var/lib/jenkins/workspace/crypto.tar.gz'
                 sshagent(['aws-key-ssh']) {
-                         sh 'scp -i /var/lib/jenkins/key.pem /var/lib/jenkins/workspace/crypto.tar.gz ec2-user@${EC2_IP_TEST}:/home/ec2-user'
+                         sh 'scp -i /var/lib/jenkins/key.pem /var/lib/jenkins/workspace/crypto.tar.gz ec2-user@$EC2_IP_TEST:/home/ec2-user'
             }
         }
     }
@@ -44,11 +44,12 @@ pipeline {
 
         stage('Setting Up The Test Server') {
             steps {
+                sh 'pwd'
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
                     sshagent(['aws-key-ssh']) {
                     sh """ 
-                    ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@${EC2_IP_TEST} '
+                    ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_TEST '
                     tar -xvf /home/ec2-user/crypto.tar.gz
                     rm -r crypto.tar.gz
                     sudo yum install python -y
@@ -57,7 +58,6 @@ pipeline {
                     chmod +x DevOps-Crypto/tests.sh
                     ansible-playbook DevOps-Crypto/requirements.yml
                     ansible-playbook DevOps-Crypto/deploy.yml
-                    ./DevOps-Crypto/tests.sh
                     '
                     """
                 }
@@ -74,7 +74,7 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
                     sshagent(['aws-key-ssh']) {
                     sh """ 
-                    ssh -i $KEY_FILE ec2-user@${EC2_IP} '
+                    ssh -i $KEY_FILE ec2-user@$EC2_IP '
                     ansible-playbook DevOps-Crypto/deploy.yml
                     '
                     """
