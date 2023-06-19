@@ -48,7 +48,7 @@ pipeline {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
                     sshagent(['aws-key-ssh']) {
                     sh """ 
-                    ssh -i $KEY_FILE ec2-user@${EC2_IP_TEST} '
+                    ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@${EC2_IP_TEST} '
                     tar -xvf /home/ec2-user/crypto.tar.gz
                     rm -r crypto.tar.gz
                     sudo yum install python -y
