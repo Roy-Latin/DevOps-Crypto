@@ -85,7 +85,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'echo "Deploying..."'
-                sh 'echo "Running the artifact on the new instance..."'
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
                     sshagent(['aws-key-ssh']) {
