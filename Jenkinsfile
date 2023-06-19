@@ -57,7 +57,7 @@ pipeline {
                     chmod +x DevOps-Crypto/tests.sh
                     ansible-playbook DevOps-Crypto/requirements.yml
                     ansible-playbook DevOps-Crypto/deploy.yml
-                    sudo ./DevOps-Crypto/tests.sh
+                    ./DevOps-Crypto/tests.sh
                     '
                     """
                 }
