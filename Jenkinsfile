@@ -57,7 +57,7 @@ pipeline {
                     chmod +x DevOps-Crypto/tests.sh
                     ansible-playbook DevOps-Crypto/requirements.yml
                     ansible-playbook DevOps-Crypto/deploy.yml
-                    ./DevOps-Crypto/tests.sh ${EC2_IP_TEST}
+                    ./DevOps-Crypto/tests.sh "${EC2_IP_TEST}"
                     '
                     """
                 }
