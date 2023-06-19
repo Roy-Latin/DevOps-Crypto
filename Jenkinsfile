@@ -54,7 +54,7 @@ pipeline {
                     sudo yum install python -y
                     sudo yum install python-pip -y
                     sudo pip install ansible
-                    chmod 777 DevOps-Crypto/tests.sh
+                    chmod +x DevOps-Crypto/tests.sh
                     ansible-playbook DevOps-Crypto/requirements.yml
                     ansible-playbook DevOps-Crypto/deploy.yml
                     sudo ./DevOps-Crypto/tests.sh
