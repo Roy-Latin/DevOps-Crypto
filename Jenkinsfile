@@ -56,7 +56,7 @@ pipeline {
                     sudo pip install ansible
                     ansible-playbook DevOps-Crypto/requirements.yml
                     ansible-playbook DevOps-Crypto/deploy.yml
-                    ./DevOps-Crypto/tests.sh
+                    sudo ./DevOps-Crypto/tests.sh
                     '
                     """
                 }
