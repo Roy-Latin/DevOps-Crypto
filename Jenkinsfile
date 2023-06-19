@@ -86,7 +86,15 @@ pipeline {
             steps {
                 sh 'echo "Deploying..."'
                 sh 'echo "Running the artifact on the new instance..."'
-                sh 'ansible-playbook -i DevOps-Crypto/deploy.yml'
+                script {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
+                    sshagent(['aws-key-ssh']) {
+                    sh """ 
+                    ssh -i $KEY_FILE ec2-user@${EC2_IP} '
+                    ansible-playbook -i DevOps-Crypto/deploy.yml
+                    '
+                    """
+                }
             }
         }
     }
