@@ -54,11 +54,8 @@ pipeline {
                     ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_TEST '
                     tar -xvf /home/ec2-user/crypto.tar.gz
                     rm -r crypto.tar.gz
-                    sudo yum install python -y
-                    sudo yum install python-pip -y
-                    sudo pip install ansible
-                    ansible-playbook DevOps-Crypto/requirements.yml
-                    ansible-playbook DevOps-Crypto/deploy.yml
+                    chmod +x setup.sh
+                    ./setup.sh
                     '
                     """
                     sh '/var/lib/jenkins/workspace/tests.sh'
