@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
-                    sh 'aws s3 cp s3://roylatin-flask-artifacts/crypto.tar.gz /home/ec2-user/'
+                    sh 'sudo aws s3 cp s3://roylatin-flask-artifacts/crypto.tar.gz /home/ec2-user/'
                     sshagent(['aws-key-ssh']) {
                     sh """ 
                     ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_TEST '
