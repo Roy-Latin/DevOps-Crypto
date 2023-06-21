@@ -57,6 +57,8 @@ pipeline {
                     ./DevOps-Crypto/setup.sh
                     '
                     """
+                    sh 'ls'
+                    sh 'pwd'
                     sh 'chmod +x DevOps-Crypto/tests.sh'
                     sh './DevOps-Crypto/tests.sh'
 
