@@ -53,12 +53,12 @@ pipeline {
                     sh """ 
                     ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_TEST '
                     tar -xvf /home/ec2-user/crypto.tar.gz
-                    rm -r crypto.tar.gz
                     chmod +x DevOps-Crypto/setup.sh
                     ./DevOps-Crypto/setup.sh
                     '
                     """
-                    sh '/var/lib/jenkins/workspace/tests.sh'
+                    sh 'chmod +x DevOps-Crypto/tests.sh'
+                    sh './DevOps-Crypto/tests.sh'
 
                 }
             }
@@ -77,12 +77,8 @@ pipeline {
                     sh """ 
                     ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_MAIN '
                     tar -xvf /home/ec2-user/crypto.tar.gz
-                    rm -r crypto.tar.gz
-                    sudo yum install python -y
-                    sudo yum install python-pip -y
-                    sudo pip install ansible
-                    ansible-playbook DevOps-Crypto/requirements.yml
-                    ansible-playbook DevOps-Crypto/deploy.yml
+                    chmod +x DevOps-Crypto/setup.sh
+                    ./DevOps-Crypto/setup.sh
                     '
                     """
                 }
