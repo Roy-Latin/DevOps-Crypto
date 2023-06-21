@@ -33,12 +33,23 @@ pipeline {
 
             }
         }
+        
+        stage('Fetch from S3 To EC2 - TEST-SERVER') {
+            steps {
+                withAWS(credentials: 'Jenkins-AWS') {
+                sh 'aws s3 cp s3://roylatin-flask-artifacts/crypto.tar.gz /home/ec2-user/ '
+               // sshagent(['aws-key-ssh']) {
+                 //        sh 'scp -i /var/lib/jenkins/key.pem /var/lib/jenkins/workspace/crypto.tar.gz ec2-user@$EC2_IP_TEST:/home/ec2-user'
+           // }
+        }
+    }
+}
 
         stage('Setting Up The Test Server And Running Checks') {
             steps {
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
-                    sh 'sudo aws s3 cp s3://roylatin-flask-artifacts/crypto.tar.gz /home/ec2-user/'
+                    //sh 'scp -i /var/lib/jenkins/key.pem /var/lib/jenkins/workspace/crypto.tar.gz ec2-user@$EC2_IP_TEST:/home/ec2-user'
                     sshagent(['aws-key-ssh']) {
                     sh """ 
                     ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_TEST '
