@@ -1,8 +1,8 @@
 pipeline {
     agent any
         environment {
-        EC2_IP_TEST = "18.212.98.180"
-        EC2_IP_MAIN = "52.91.86.112"
+        EC2_IP_TEST = "54.234.179.11"
+        EC2_IP_MAIN = "54.160.178.222"
     }
 
     stages {
