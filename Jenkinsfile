@@ -68,7 +68,7 @@ pipeline {
 }
 
         
-        stage('Deploying On Main Server') {
+        stage('Deploying On Prod. Server') {
             steps {
                 sh 'echo "Deploying..."'
                 script {
