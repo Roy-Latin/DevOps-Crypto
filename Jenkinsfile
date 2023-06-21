@@ -72,11 +72,10 @@ pipeline {
                 sh 'echo "Deploying..."'
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
-                    sh 'scp -i /var/lib/jenkins/key.pem /var/lib/jenkins/workspace/crypto.tar.gz ec2-user@$EC2_IP_MAIN:/home/ec2-user'
+                    sh 'scp -i /var/lib/jenkins/key.pem -r DevOps-Crypto ec2-user@$EC2_IP_MAIN:/home/ec2-user'
                     sshagent(['aws-key-ssh']) {
                     sh """ 
                     ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_MAIN '
-                    tar -xvf /home/ec2-user/crypto.tar.gz
                     chmod +x DevOps-Crypto/setup.sh
                     ./DevOps-Crypto/setup.sh
                     '
