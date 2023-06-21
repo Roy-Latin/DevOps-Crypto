@@ -49,7 +49,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
-                    sh 'scp -i /var/lib/jenkins/key.pem DevOps-Crypto ec2-user@$EC2_IP_TEST:/home/ec2-user'
+                    sh 'scp -i /var/lib/jenkins/key.pem -r DevOps-Crypto ec2-user@$EC2_IP_TEST:/home/ec2-user'
                     sshagent(['aws-key-ssh']) {
                     sh """ 
                     ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_TEST '
