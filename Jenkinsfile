@@ -4,28 +4,21 @@ pipeline {
         EC2_IP_TEST = "54.234.179.11"
         EC2_IP_MAIN = "54.160.178.222"
     }
-
     stages {
         stage('Cleanup And Clone') {
             steps {
-                sh 'echo "Performing cleanup..."'
+                sh 'echo "Performing cleanup And Cloning Git Repo..."'
                 sh 'rm -rf *'
-                sh 'echo "Cloning..."'
                 sh 'git clone https://github.com/Roy-Latin/DevOps-Crypto.git'
-                sh 'ls'
             }
         }
         stage('Packaging And Pushing To S3') {
             steps {
-                sh 'echo "packaging"'
+                sh 'echo "packaging And Pushing To S3..."'
                 sh 'tar -czvf crypto.tar.gz DevOps-Crypto'
-                sh 'ls'
-                sh 'echo "pushing to s3"'
-                sh 'echo "packaging"'
                 sh 'aws s3 cp crypto.tar.gz s3://roylatin-flask-artifacts'
             }
         }
-        
         stage('check for the connection'){
             steps {
                 sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@$EC2_IP_TEST'
@@ -33,7 +26,6 @@ pipeline {
 
             }
         }
-        
         stage('Setting Up The Test Server And Running Checks') {
             steps {
                 script {
@@ -53,9 +45,7 @@ pipeline {
             }
         }
     }
-}
-
-        
+} 
         stage('Deploying On Prod. Server') {
             steps {
                 sh 'echo "Deploying..."'
