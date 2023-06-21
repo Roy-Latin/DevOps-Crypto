@@ -38,9 +38,9 @@ pipeline {
             steps {
                 withAWS(credentials: 'Jenkins-AWS') {
                 sh 'aws s3 cp s3://roylatin-flask-artifacts/crypto.tar.gz /home/ec2-user/ '
-                //sshagent(['aws-key-ssh']) {
-                  //       sh 'scp -i /var/lib/jenkins/key.pem /var/lib/jenkins/workspace/crypto.tar.gz ec2-user@$EC2_IP_TEST:/home/ec2-user'
-            //}
+                sshagent(['aws-key-ssh']) {
+                         sh 'scp -i /var/lib/jenkins/key.pem /var/lib/jenkins/workspace/crypto.tar.gz ec2-user@$EC2_IP_TEST:/home/ec2-user'
+            }
         }
     }
 }
