@@ -1,8 +1,8 @@
 pipeline {
     agent any
         environment {
-        EC2_IP_TEST = "3.80.156.252"
-        EC2_IP_MAIN = "54.82.127.106"
+        EC2_IP_TEST = "54.163.62.146"
+        EC2_IP_PROD = "34.239.115.175"
     }
     stages {
         stage('Cleanup And Clone') {
@@ -22,7 +22,7 @@ pipeline {
         stage('check for the connection'){
             steps {
                 sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@$EC2_IP_TEST'
-                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@$EC2_IP_MAIN'
+                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@$EC2_IP_PROD'
 
             }
         }
@@ -51,10 +51,10 @@ pipeline {
                 sh 'echo "Deploying..."'
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
-                    sh 'scp -i $KEY_FILE -r DevOps-Crypto ec2-user@$EC2_IP_MAIN:/home/ec2-user'
+                    sh 'scp -i $KEY_FILE -r DevOps-Crypto ec2-user@$EC2_IP_PROD:/home/ec2-user'
                     sshagent(['aws-key-ssh']) {
                     sh """ 
-                    ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_MAIN '
+                    ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_PROD '
                     chmod +x DevOps-Crypto/setup.sh
                     ./DevOps-Crypto/setup.sh
                     '

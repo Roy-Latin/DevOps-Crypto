@@ -50,4 +50,18 @@
     - name: Copy flaskapp.service file
       copy:
         src: "flask_startup_template.j2"
-        dest: "/etc/systemd/system/flaskapp.service"    
+        dest: "/etc/systemd/system/flaskapp.service"
+
+    - name: Reload systemd daemon
+      become: true
+      command: sudo systemctl daemon-reload
+
+    - name: Restart service
+      systemd:
+        name: flaskapp.service
+        state: restarted
+
+    - name: Enable service
+      systemd:
+        name: flaskapp.service
+        enabled: yes    
