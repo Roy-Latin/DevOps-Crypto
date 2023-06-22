@@ -1,8 +1,8 @@
 pipeline {
     agent any
         environment {
-        EC2_IP_TEST = "54.234.179.11"
-        EC2_IP_MAIN = "54.160.178.222"
+        EC2_IP_TEST = "3.80.156.252"
+        EC2_IP_MAIN = "54.82.127.106"
     }
     stages {
         stage('Cleanup And Clone') {
