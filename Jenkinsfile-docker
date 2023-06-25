@@ -4,6 +4,8 @@ pipeline {
         stage('Clean Up And Build New Image') {
             steps {
                 // Clean up Docker images
+                sh 'rm -rf *'
+                sh 'git clone https://github.com/Roy-Latin/DevOps-Crypto.git'
                 sh 'docker rmi -f  roylatin/devops-crypto:latest'
                 sh 'docker build -t roylatin/devops-crypto .'
             }
