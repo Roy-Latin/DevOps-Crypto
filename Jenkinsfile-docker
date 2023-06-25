@@ -7,10 +7,10 @@ pipeline {
                 sh 'rm -rf *'
                 sh 'git clone https://github.com/Roy-Latin/DevOps-Crypto.git'
                 //Deletes Previous Docker Images
-                sh 'sudo docker rmi -f  roylatin/devops-crypto:latest'
+                sh 'docker rmi -f  roylatin/devops-crypto:latest'
                 //Creates Docker Image
                 dir('DevOps-Crypto'){
-                sh 'sudo docker build -t roylatin/devops-crypto .'
+                sh 'docker build -t roylatin/devops-crypto .'
                 }
             }
         }
