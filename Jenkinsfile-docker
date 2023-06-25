@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Push The Image To Docker Hub') {
             steps {
-                sh 'sudo docker push roylatin/devops-crypto'
+                sh 'docker push roylatin/devops-crypto'
             }
         }
     }
