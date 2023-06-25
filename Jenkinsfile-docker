@@ -21,7 +21,9 @@ pipeline {
         }
 
         stage('Running Docker'){
+            steps {
             sh 'docker run -p 5000:5000 roylatin/devops-crypto'
+            }
         }
     }
 }
