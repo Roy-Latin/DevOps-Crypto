@@ -7,7 +7,9 @@ pipeline {
                 sh 'rm -rf *'
                 sh 'git clone https://github.com/Roy-Latin/DevOps-Crypto.git'
                 sh 'docker rmi -f  roylatin/devops-crypto:latest'
+                dir('DevOps-Crypto'){
                 sh 'docker build -t roylatin/devops-crypto .'
+                }
             }
         }
     }
