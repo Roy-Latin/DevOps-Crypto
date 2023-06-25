@@ -12,6 +12,7 @@ pipeline {
                 }
             }
         }
+        stage('Push The Image To Docker Hub')
     }
 }
     
