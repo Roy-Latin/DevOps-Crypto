@@ -35,7 +35,7 @@ pipeline {
                     sudo yum install docker -y
                     sudo systemctl restart docker
                     sudo docker rmi -f  roylatin/devops-crypto:latest
-                    sudo docker run -p 5000:5000 roylatin/devops-crypto
+                    sudo docker run -d -p 5000:5000 roylatin/devops-crypto
                     '
                     """
                     //sh 'chmod +x DevOps-Crypto/tests.sh'
