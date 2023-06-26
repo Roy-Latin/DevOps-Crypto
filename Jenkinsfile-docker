@@ -43,7 +43,7 @@ pipeline {
                     sh 'docker push roylatin/devops-crypto:1.${BUILD_NUMBER}'
 
                     // Cleanup old Docker images
-                    sh "docker image ls --format '{{.ID}}' roylatin/devops-crypto --filter 'dangling=false' | sort -r | awk 'NR>3' | xargs -I {} docker image rm {}"
+                    sh "docker image ls --format '{{.ID}}' roylatin/devops-crypto --filter 'dangling=false' | sort -rf | awk 'NR>3' | xargs -I {} docker image rm {}"
             }
         }
 
