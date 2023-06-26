@@ -14,7 +14,7 @@ def connectToServer(String ipAddress) {
         }
     }
 }
-
+def buildNumber = env.BUILD_NUMBER
 pipeline {
     agent any
     
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 //Creates Docker Image
                 dir('DevOps-Crypto'){
-                sh 'docker build -t roylatin/devops-crypto .'
+                sh 'docker build -t roylatin/devops-crypto:1.${buildNumber} -t roylatin/devops-crypto:latest .'
                 }
                 //Pushes Docker Image To Docker Hub
                 sh 'docker push roylatin/devops-crypto'
