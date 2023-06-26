@@ -5,21 +5,22 @@ pipeline {
         EC2_IP_PROD = "18.206.120.216"
     }
     stages {
-        stage('Clean Up And Build New Image') {
+        stage('Clean Up') {
             steps {
                 // Clean Up Project Files And Clone Git - To Update The Project
                 sh 'rm -rf *'
                 sh 'git clone https://github.com/Roy-Latin/DevOps-Crypto.git'
                 //Deletes Previous Docker Images
                 sh 'docker rmi -f  roylatin/devops-crypto:latest'
+            }
+        }
+        stage('Build And Push The Image To Docker Hub') {
+            steps {
                 //Creates Docker Image
                 dir('DevOps-Crypto'){
                 sh 'docker build -t roylatin/devops-crypto .'
                 }
-            }
-        }
-        stage('Push The Image To Docker Hub') {
-            steps {
+                //Pushes Docker Image To Docker Hub
                 sh 'docker push roylatin/devops-crypto'
             }
         }
@@ -27,6 +28,7 @@ pipeline {
         stage('Running Docker On Test Server') {
             steps {
                 script {
+                    //Connect To Test Server On AWS And Installs Docker, Restart The Service, Clean Old Images And Run docker
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
                     sshagent(['aws-key-ssh']) {
                     sh """ 
@@ -37,6 +39,7 @@ pipeline {
                     sudo docker run -d -p 5000:5000 roylatin/devops-crypto
                     '
                     """
+                    //Runs Tests From The Main Mechine On The Website
                     sh 'chmod +x DevOps-Crypto/tests.sh'
                     sh './DevOps-Crypto/tests.sh'
 
@@ -48,6 +51,7 @@ pipeline {
         stage('Running Docker On Prod Server') {
             steps {
                 script {
+                    //Connect To Prod Server On AWS And Installs Docker, Restart The Service, Clean Old Images And Run docker
                     withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
                     sshagent(['aws-key-ssh']) {
                     sh """ 
