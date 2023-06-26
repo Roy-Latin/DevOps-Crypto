@@ -9,7 +9,7 @@ app = Flask(__name__, static_url_path='/static')
 def home_page():
     return render_template("HomePage.html")
 
-@app.route("/")
+@app.route("/eth")
 def eth():
     # Make a GET request to the CoinDesk API
     eth_response = requests.get("https://api.coingecko.com/api/v3/coins/")
