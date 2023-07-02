@@ -61,6 +61,24 @@
   </div>
   
       <div class="card"></div>
+
+      <h1>Price Table</h1>
+      <table>
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for row in price_table_data %}
+              <tr>
+                  <td>{{ row[0] }}</td>
+                  <td>{{ row[1] }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
     
     
 </body>
