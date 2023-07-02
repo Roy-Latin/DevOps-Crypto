@@ -40,6 +40,7 @@ pipeline {
                     }
                     //Pushes Docker Image To Docker Hub
                     sh 'docker push roylatin/devops-crypto:1.${BUILD_NUMBER}'
+                    sh 'docker push roylatin/devops-crypto:latest'
 
                     // Cleanup old Docker images
                     sh "docker image ls --format '{{.ID}}' roylatin/devops-crypto --filter 'dangling=false' | sort -r | awk 'NR>4' | xargs -I {} docker image rm -f {}"            
