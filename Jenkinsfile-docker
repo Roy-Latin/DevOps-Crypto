@@ -17,8 +17,8 @@ pipeline {
     agent any
     
      environment {
-        EC2_IP_TEST = "3.95.150.225"
-        EC2_IP_PROD = "3.82.190.60"
+        EC2_IP_TEST = "44.204.16.37"
+        EC2_IP_PROD = "3.95.190.253"
     }
 
     stages {
