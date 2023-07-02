@@ -6,7 +6,6 @@ def connectToServer(String ipAddress) {
                 ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$ipAddress '
                 sudo yum install docker -y
                 sudo systemctl restart docker
-                sudo docker rmi -f roylatin/devops-crypto:latest
                 sudo docker run -d -p 5000:5000 roylatin/devops-crypto
                 '
                 """
