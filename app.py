@@ -1,9 +1,28 @@
 from flask import Flask, render_template, jsonify
 import requests
-
+import mysql.connector
 
 app = Flask(__name__, static_url_path='/static')
 
+def price_table(name: str, price: float) -> None:
+    config = {
+        'user': 'root',
+        'password': 'password',
+        'host': 'db',
+        'port': '3306',
+        'database': 'crypto'
+    }
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+
+    # Insert the Ethereum price data into the price_table
+    cursor.execute('INSERT INTO price_table (name, price) VALUES (%s, %s)', (name, price))
+
+    # Commit the changes to the database
+    connection.commit()
+
+    cursor.close()
+    connection.close()
 
 @app.route("/")
 def home_page():
@@ -11,18 +30,24 @@ def home_page():
 
 @app.route("/eth")
 def eth():
-    # Make a GET request to the CoinDesk API
-    eth_response = requests.get("https://api.coingecko.com/api/v3/coins/")
+    # Make a GET request to the CoinGecko API
+    eth_response = requests.get("https://api.coingecko.com/api/v3/coins/ethereum")
 
     # Extract the Ethereum price from the API response
     if eth_response.status_code == 200:
         eth_data = eth_response.json()
-        eth_price = eth_data[1]["market_data"]["current_price"]["usd"]
-        eth_price_h24 = eth_data[1]["market_data"]["high_24h"]["usd"]
-        eth_price_l24 = eth_data[1]["market_data"]["low_24h"]["usd"]
+        eth_price = eth_data["market_data"]["current_price"]["usd"]
+        eth_price_h24 = eth_data["market_data"]["high_24h"]["usd"]
+        eth_price_l24 = eth_data["market_data"]["low_24h"]["usd"]
+        coin_name = "Ethereum"  # Set the coin name as desired
 
-    # Pass the Bitcoin price data to the template
-    return render_template("eth.html", eth_price=eth_price, eth_price_h24=eth_price_h24, eth_price_l24=eth_price_l24)
+    # Update the price_table with the Ethereum price data
+    price_table(coin_name, eth_price)
+
+    price_table_data = price_table()
+
+    # Pass the Ethereum price data to the template
+    return render_template("eth.html", eth_price=eth_price, eth_price_h24=eth_price_h24, eth_price_l24=eth_price_l24, price_table_data=price_table_data)
 
 @app.route("/btc")
 def btc():
