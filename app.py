@@ -1,28 +1,8 @@
 from flask import Flask, render_template, jsonify
 import requests
-import mysql.connector
 
 app = Flask(__name__, static_url_path='/static')
 
-def price_table(name: str, price: float) -> None:
-    config = {
-        'user': 'root',
-        'password': 'password',
-        'host': 'db',
-        'port': '3306',
-        'database': 'crypto'
-    }
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-
-    # Insert the Ethereum price data into the price_table
-    cursor.execute('INSERT INTO price_table (name, price) VALUES (%s, %s)', (name, price))
-
-    # Commit the changes to the database
-    connection.commit()
-
-    cursor.close()
-    connection.close()
 
 @app.route("/")
 def home_page():
@@ -39,10 +19,6 @@ def eth():
         eth_price = eth_data["market_data"]["current_price"]["usd"]
         eth_price_h24 = eth_data["market_data"]["high_24h"]["usd"]
         eth_price_l24 = eth_data["market_data"]["low_24h"]["usd"]
-
-    # Update the price_table with the Ethereum price data
-    #price_table(coin_name, eth_price)
-
 
     # Pass the Ethereum price data to the template
     return render_template("eth.html", eth_price=eth_price, eth_price_h24=eth_price_h24, eth_price_l24=eth_price_l24)
