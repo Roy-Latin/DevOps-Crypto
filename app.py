@@ -39,15 +39,13 @@ def eth():
         eth_price = eth_data["market_data"]["current_price"]["usd"]
         eth_price_h24 = eth_data["market_data"]["high_24h"]["usd"]
         eth_price_l24 = eth_data["market_data"]["low_24h"]["usd"]
-        coin_name = "Ethereum"  # Set the coin name as desired
 
     # Update the price_table with the Ethereum price data
-    price_table(coin_name, eth_price)
+    #price_table(coin_name, eth_price)
 
-    price_table_data = price_table()
 
     # Pass the Ethereum price data to the template
-    return render_template("eth.html", eth_price=eth_price, eth_price_h24=eth_price_h24, eth_price_l24=eth_price_l24, price_table_data=price_table_data)
+    return render_template("eth.html", eth_price=eth_price, eth_price_h24=eth_price_h24, eth_price_l24=eth_price_l24)
 
 @app.route("/btc")
 def btc():
