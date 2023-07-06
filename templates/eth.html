@@ -9,29 +9,38 @@
     <h1>Crypto Prices</h1>
   </div>
 
-  <div class="container-a">
-    <div class="grey-square-a">
+  <div class="container-b">
+    <div class="grey-square-left">
+      <div class="price-b">
+        <table>
+          <tr>
+              <th>Name</th>
+              <th>Price</th>
+          </tr>
+          {% for row in eth_price_data[-10:] %}
+          <tr>
+              <td>{{ row[0] }}</td>
+              <td>{{ row[1] }}</td>
+          </tr>
+          {% endfor %}
+      </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-b">
+    <div class="grey-square-right">
       <div class="price-a">
-        <h1>Ethereum Price</h1>
+        <h2>__________________________________</h2>
+        <h1>Ethereum Price:</h1>
         <h1>{{ eth_price }}$</h1>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-b">
-    <div class="grey-square-b">
-      <div class="price-a">
-        <h1>Ethereum Price low 24 hours:</h1>
-        <h1>{{ eth_price_l24 }}$</h1>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-b">
-    <div class="grey-square-c">
-      <div class="price-a">
+        <h2>__________________________________</h2>
         <h1>Ethereum Price high 24 hours:</h1>
         <h1>{{ eth_price_h24 }}$</h1>
+        <h2>__________________________________</h2>
+        <h1>Ethereum Price low 24 hours:</h1>
+        <h1>{{ eth_price_l24 }}$</h1>
+        <h2>__________________________________</h2>
       </div>
     </div>
   </div>
@@ -61,24 +70,6 @@
   </div>
   
       <div class="card"></div>
-
-      <h1>Price Table</h1>
-      <table>
-          <thead>
-              <tr>
-                  <th>Name</th>
-                  <th>Price</th>
-              </tr>
-          </thead>
-          <tbody>
-              {% for row in price_table_data %}
-              <tr>
-                  <td>{{ row[0] }}</td>
-                  <td>{{ row[1] }}</td>
-              </tr>
-              {% endfor %}
-          </tbody>
-      </table>
     
     
 </body>

@@ -25,41 +25,27 @@ code {
   height: 100vh;
 }
 
-.grey-square-a {
+.grey-square-left {
   position: fixed;
   top: 45%;
-  left: 50%;
+  left: 70%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  width: 250px;
-  height: 250px;
+  width: 550px;
+  height: 550px;
   background: #212429;
  box-shadow: 5px 5px 30px rgb(36, 36, 36),
              -5px -5px 30px rgb(36, 36, 36);
 }
 
-
-.grey-square-b {
+.grey-square-right {
   position: fixed;
   top: 45%;
-  left: 75%;
+  left: 30%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  width: 250px;
-  height: 250px;
-  background: #212429;
- box-shadow: 5px 5px 30px rgb(36, 36, 36),
-             -5px -5px 30px rgb(36, 36, 36);
-}
-
-.grey-square-c {
-  position: fixed;
-  top: 45%;
-  left: 25%;
-  transform: translate(-50%, -50%);
-  border-radius: 15px;
-  width: 250px;
-  height: 250px;
+  width: 550px;
+  height: 550px;
   background: #212429;
  box-shadow: 5px 5px 30px rgb(36, 36, 36),
              -5px -5px 30px rgb(36, 36, 36);
@@ -76,11 +62,22 @@ code {
   font-family: Arial, sans-serif;
 }
 
+.price-b {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  font-size: 2rem;
+  font-family: Arial, sans-serif;
+}
+
 .button-container {
   display: flex;
   align-items: center;
   position: fixed;
-  top: 80%; /* Adjust the vertical position */
+  top: 85%; /* Adjust the vertical position */
   left: 50%; /* Adjust the horizontal position */
   transform: translate(-50%, -50%);
   text-align: center;
@@ -215,3 +212,7 @@ button:active {
   inset: 5px;
   border-radius: 15px;
 } 
+
+h2 {
+    color: rgb(89, 89, 89);
+  }

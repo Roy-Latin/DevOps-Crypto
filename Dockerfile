@@ -1,7 +1,7 @@
 FROM python:3.8
 
 # set a directory for the app
-WORKDIR /home/roy/docker/DevOps-Crypto
+WORKDIR /home/roy/DevOps-Crypto
 
 # copy all the files to the container
 COPY . .
