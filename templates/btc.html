@@ -11,14 +11,14 @@
   </div>
 
   <div class="container-b">
-    <div class="grey-square-left">
+    <div class="square-left">
       <div class="price-b">
         <table>
           <tr>
               <th>Name</th>
               <th>Price</th>
           </tr>
-          {% for row in btc_price_data[-10:] %}
+          {% for row in btc_price_data[::-1] %}
           <tr>
               <td>{{ row[0] }}</td>
               <td>{{ row[1] }}</td>
@@ -30,7 +30,7 @@
   </div>
 
   <div class="container-b">
-    <div class="grey-square-right">
+    <div class="square-right">
       <div class="price-a">
         <h2>__________________________________</h2>
         <h1>Bitcoin Price:</h1>

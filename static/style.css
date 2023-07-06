@@ -25,7 +25,7 @@ code {
   height: 100vh;
 }
 
-.grey-square-left {
+.square-left {
   position: fixed;
   top: 45%;
   left: 70%;
@@ -33,12 +33,9 @@ code {
   border-radius: 15px;
   width: 550px;
   height: 550px;
-  background: #212429;
- box-shadow: 5px 5px 30px rgb(36, 36, 36),
-             -5px -5px 30px rgb(36, 36, 36);
 }
 
-.grey-square-right {
+.square-right {
   position: fixed;
   top: 45%;
   left: 30%;
@@ -46,14 +43,14 @@ code {
   border-radius: 15px;
   width: 550px;
   height: 550px;
-  background: #212429;
- box-shadow: 5px 5px 30px rgb(36, 36, 36),
-             -5px -5px 30px rgb(36, 36, 36);
+  background: #40336b;
+ box-shadow: 5px 5px 30px rgba(246, 246, 246, 0.126),
+             -5px -5px 30px rgba(246, 246, 246, 0.126);
 }
 
 .price-a {
   position: fixed;
-  top: 45%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -64,13 +61,16 @@ code {
 
 .price-b {
   position: fixed;
-  top: 45%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
   font-size: 2rem;
   font-family: Arial, sans-serif;
+  border-radius: 15px;
+  height: 550px;
+  overflow-y: scroll; 
 }
 
 .button-container {
@@ -144,9 +144,9 @@ button:active {
   border-radius: 15px;
   width: 600px;
   height: 250px;
-  background: #212429;
- box-shadow: 5px 5px 30px rgb(36, 36, 36),
-             -5px -5px 30px rgb(36, 36, 36);
+  background: #40336b;
+ box-shadow: 5px 5px 30px rgba(246, 246, 246, 0.126),
+             -5px -5px 30px rgba(246, 246, 246, 0.126);
 }
 
 .content {
@@ -214,5 +214,42 @@ button:active {
 } 
 
 h2 {
-    color: rgb(89, 89, 89);
+    color: #705bb1;
   }
+
+table {
+    border-collapse: collapse;
+    width: 540px;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    text-align: middle;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 5px 5px 30px rgba(246, 246, 246, 0.126),
+             -5px -5px 30px rgba(246, 246, 246, 0.126);
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+table th {
+    background-color: #705bb1;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+table td {
+    background-color: #e9e6e6f6;
+}
+
+table tr:hover td {
+    background-color: #705bb1;
+}
+
+table td {
+  background-color: #e1dedef4;
+  padding: 10px;
+  font-weight: bold;
+}
