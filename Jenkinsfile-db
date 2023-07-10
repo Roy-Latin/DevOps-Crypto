@@ -51,9 +51,17 @@ pipeline {
             }
         }
 
+        stage('check for the connection'){
+            steps {
+                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@$EC2_IP_TEST'
+                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem ec2-user@$EC2_IP_PROD'
+
+            }
+        }
+
         stage('Running Docker On Test Server') {
             steps {
-                sh 'scp -i /var/lib/jenkins/key.pem -r DevOps-Crypto ec2-user@$EC2_IP_TEST:/home/ec2-user'
+                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem -r DevOps-Crypto ec2-user@$EC2_IP_TEST:/home/ec2-user'
                 connectToServer(EC2_IP_TEST)
                 // Runs tests from the main machine on the website
                 sh 'chmod +x DevOps-Crypto/tests.sh'
@@ -63,7 +71,7 @@ pipeline {
 
         stage('Running Docker On Prod Server') {
             steps {
-                sh 'scp -i /var/lib/jenkins/key.pem -r DevOps-Crypto ec2-user@$EC2_IP_PROD:/home/ec2-user'
+                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/key.pem -r DevOps-Crypto ec2-user@$EC2_IP_PROD:/home/ec2-user'
                 connectToServer(EC2_IP_PROD)
             }
         }
