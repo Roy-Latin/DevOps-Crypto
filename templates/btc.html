@@ -5,10 +5,6 @@
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <div class="container"></div>
-  <div class="maintitle1">
-    <h1>Crypto Prices</h1>
-  </div>
 
   <div class="container-b">
     <div class="square-left">
@@ -34,13 +30,13 @@
       <div class="price-a">
         <h2>__________________________________</h2>
         <h1>Bitcoin Price:</h1>
-        <h1>{{ btc_price }}$</h1>
+        <h1>{{ bitcoin_price }}$</h1>
         <h2>__________________________________</h2>
         <h1>Bitcoin Price high 24 hours:</h1>
-        <h1>{{ btc_price_h24 }}$</h1>
+        <h1>{{ bitcoin_price_h24 }}$</h1>
         <h2>__________________________________</h2>
         <h1>Bitcoin Price low 24 hours:</h1>
-        <h1>{{ btc_price_l24 }}$</h1>
+        <h1>{{ bitcoin_price_l24 }}$</h1>
         <h2>__________________________________</h2>
       </div>
     </div>
