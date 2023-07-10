@@ -11,6 +11,7 @@ def connectToServer(String ipAddress) {
                 sudo chmod +x /usr/local/bin/docker-compose
                 sudo yum install python3-pip -y
                 pip install mysql-connector-python
+                sudo docker-compose up --build
                 '
                 """
             }
