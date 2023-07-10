@@ -1,0 +1,69 @@
+def connectToServer(String ipAddress) {
+    script {
+        withCredentials([sshUserPrivateKey(credentialsId: 'aws-key-ssh', keyFileVariable: 'KEY_FILE')]) {
+            sh 'scp -i $KEY_FILE -r DevOps-Crypto ec2-user@$EC2_IP_TEST:/home/ec2-user'
+            sshagent(['aws-key-ssh']) {
+                sh """ 
+                ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$ipAddress '
+                sudo yum install docker -y
+                sudo systemctl restart docker
+                sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                sudo chmod +x /usr/local/bin/docker-compose
+                sudo yum install python3-pip -y
+                pip install mysql-connector-python
+                '
+                """
+            }
+        }
+    }
+}
+pipeline {
+    agent any
+    
+     environment {
+        EC2_IP_TEST = "23.23.36.112"
+        EC2_IP_PROD = "54.237.195.117"
+    }
+
+    stages {
+        stage('Clean Up') {
+            steps {
+                // Clean Up Project Files And Clone Git - To Update The Project
+                sh 'rm -rf *'
+                sh 'git clone https://github.com/Roy-Latin/DevOps-Crypto.git'
+                //Deletes Previous Docker Images
+                sh 'docker rmi -f  roylatin/devops-crypto:latest'
+            }
+        }
+
+        stage('Build And Push The Image To Docker Hub') {
+            steps {
+                    //Creates Docker Image
+                    dir('DevOps-Crypto'){
+                    sh 'docker build -t roylatin/devops-crypto:2.${BUILD_NUMBER} -t roylatin/devops-crypto:latest .'
+                    }
+                    //Pushes Docker Image To Docker Hub
+                    sh 'docker push roylatin/devops-crypto:2.${BUILD_NUMBER}'
+                    sh 'docker push roylatin/devops-crypto:latest'
+
+                    // Cleanup old Docker images
+                    sh "docker image ls --format '{{.ID}}' roylatin/devops-crypto --filter 'dangling=false' | sort -r | awk 'NR>4' | xargs -I {} docker image rm -f {}"            
+            }
+        }
+
+        stage('Running Docker On Test Server') {
+            steps {
+                connectToServer(EC2_IP_TEST)
+                // Runs tests from the main machine on the website
+                sh 'chmod +x DevOps-Crypto/tests.sh'
+                sh './DevOps-Crypto/tests.sh'
+            }
+        }
+
+        stage('Running Docker On Prod Server') {
+            steps {
+                connectToServer(EC2_IP_PROD)
+            }
+        }
+    }
+}
