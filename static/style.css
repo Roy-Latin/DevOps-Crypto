@@ -1,10 +1,6 @@
 body {
-  background-image: url('https://images.hdqwalls.com/download/gradient-noise-8k-ws-3840x2400.jpg');
   background-size: cover;
-  background-position: middle;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
+  background-image: url('https://images.hdqwalls.com/download/gradient-noise-8k-ws-3840x2400.jpg');
   color: white;
 }
         
@@ -18,6 +14,8 @@ code {
   background: #1a2279;
   color: #dbf1f5;
 }
+
+
 
 .container-a {
   position: relative;
@@ -43,9 +41,11 @@ code {
   border-radius: 15px;
   width: 550px;
   height: 550px;
-  background: #40336b;
- box-shadow: 5px 5px 30px rgba(246, 246, 246, 0.126),
-             -5px -5px 30px rgba(246, 246, 246, 0.126);
+  backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    background-color: rgba(38, 38, 39, 0.38);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .price-a {
@@ -57,6 +57,7 @@ code {
   text-align: center;
   font-size: 0.85rem;
   font-family: Arial, sans-serif;
+  color: rgb(220, 218, 218);
 }
 
 .price-b {
@@ -92,7 +93,7 @@ button {
   font-size: 18px;
   letter-spacing: 1px;
   text-decoration: none;
-  color: #ffffff;
+  color: rgb(220, 218, 218);
   background: transparent;
   cursor: pointer;
   transition: ease-out 0.5s;
@@ -123,13 +124,14 @@ button:active {
 
 .maintitle1 {
   position: fixed;
-  top: 100px; /* Adjust the value as needed */
+  top: 200px; /* Adjust the value as needed */
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
   font-size: 3rem;
   font-family: Arial, sans-serif;
+  color: rgb(220, 218, 218);
   text-shadow: -1px 1px 2px #000,
       1px 2px 6px #000,
       1px -1px 0 #000,
@@ -144,9 +146,11 @@ button:active {
   border-radius: 15px;
   width: 600px;
   height: 250px;
-  background: #40336b;
- box-shadow: 5px 5px 30px rgba(246, 246, 246, 0.126),
-             -5px -5px 30px rgba(246, 246, 246, 0.126);
+  backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    background-color: rgba(38, 38, 39, 0.38);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .content {
@@ -156,8 +160,24 @@ button:active {
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-family: Arial, sans-serif;
+  color: rgb(220, 218, 218);
+}
+
+.card2 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    backdrop-filter: blur(25px) saturate(130%);
+    -webkit-backdrop-filter: blur(25px) saturate(130%);
+    background-color: rgba(8, 8, 15, 0.38);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    z-index: -1
 }
        
 .card {
@@ -178,44 +198,7 @@ button:active {
   z-index: -1;
 }
 
-.card h2 {
-  z-index: 1;
-  color: white;
-  font-size: 2em;
-}
 
-.card::before {
-  content: '';
-  position: absolute;
-  width: 100px;
-  background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
-  height: 1300%;
-  animation: rotBGimg 3s linear infinite;
-  transition: all 0.2s linear;
-}
-
-@keyframes rotBGimg {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.card::after {
-  content: '';
-  position: absolute;
-  background: #07182E;
-  ;
-  inset: 5px;
-  border-radius: 15px;
-} 
-
-h2 {
-    color: #705bb1;
-  }
 
 table {
     border-collapse: collapse;
@@ -226,8 +209,6 @@ table {
     text-align: middle;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 5px 5px 30px rgba(246, 246, 246, 0.126),
-             -5px -5px 30px rgba(246, 246, 246, 0.126);
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -249,7 +230,10 @@ table tr:hover td {
 }
 
 table td {
-  background-color: #e1dedef4;
+  backdrop-filter: blur(25px) saturate(130%);
+  -webkit-backdrop-filter: blur(25px) saturate(130%);
+  background-color: rgba(38, 38, 39, 0.38);
   padding: 10px;
   font-weight: bold;
+  color:rgb(220, 218, 218);
 }
