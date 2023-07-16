@@ -42,10 +42,9 @@ code {
   width: 550px;
   height: 550px;
   backdrop-filter: blur(25px) saturate(200%);
-    -webkit-backdrop-filter: blur(25px) saturate(200%);
-    background-color: rgba(38, 38, 39, 0.38);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.125);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(48, 47, 47, 0.842);
+  border-radius: 15px;
 }
 
 .price-a {
@@ -148,9 +147,8 @@ button:active {
   height: 250px;
   backdrop-filter: blur(25px) saturate(200%);
     -webkit-backdrop-filter: blur(25px) saturate(200%);
-    background-color: rgba(38, 38, 39, 0.38);
+    background-color: rgba(48, 47, 47, 0.842);
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .content {
@@ -174,12 +172,12 @@ button:active {
     height: 90%;
     backdrop-filter: blur(25px) saturate(130%);
     -webkit-backdrop-filter: blur(25px) saturate(130%);
-    background-color: rgba(8, 8, 15, 0.38);
+    background-color: rgba(54, 54, 54, 0.51);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.125);
     z-index: -1
 }
-       
+
 .card {
   position: fixed;
   top: 50%;
@@ -187,16 +185,52 @@ button:active {
   transform: translate(-50%, -50%);
   width: 90%;
   height: 90%;
-  opacity: 0.8;
-  backdrop-filter: blur(10px);
-  background: #07182E;
+  opacity: 0.9;
   display: flex;
   place-content: center;
   place-items: center;
   overflow: hidden;
-  border-radius: 20px;
+  backdrop-filter: blur(25px) saturate(150%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(7, 24, 56);
+  border-radius: 15px;
   z-index: -1;
 }
+
+.card::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+  height: 1300%;
+  animation: rotBGimg 3s linear infinite;
+  transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  backdrop-filter: blur(25px) saturate(150%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgb(7, 24, 56);
+  border-radius: 15px;
+  ;
+  inset: 5px;
+} 
+
+h2 {
+    color: #4b4b4b;
+  }
 
 
 
@@ -232,7 +266,7 @@ table tr:hover td {
 table td {
   backdrop-filter: blur(25px) saturate(130%);
   -webkit-backdrop-filter: blur(25px) saturate(130%);
-  background-color: rgba(38, 38, 39, 0.38);
+  background-color: rgba(48, 47, 47, 0.842);
   padding: 10px;
   font-weight: bold;
   color:rgb(220, 218, 218);

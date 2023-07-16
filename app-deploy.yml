@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: my-flask-app
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: my-flask-app
@@ -17,4 +17,15 @@ spec:
           image: roylatin/devops-crypto:latest
           ports:
             - containerPort: 5000
+          env:
+            - name: DB_HOST
+              value: mysql-service
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              value: password
+            - name: DB_NAME
+              value: crypto
 
