@@ -2,6 +2,334 @@
 <html>
 <head>
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+  <style>
+    body {
+  background-size: cover;
+  background-image: url('https://images.hdqwalls.com/download/gradient-noise-8k-ws-3840x2400.jpg');
+  color: white;
+}
+        
+code {
+  display: inline-block;
+  padding: 3px 6px;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  background: #1a2279;
+  color: #dbf1f5;
+}
+
+
+
+.container-a {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.square-left {
+  position: fixed;
+  top: 45%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  width: 550px;
+  height: 550px;
+}
+
+.square-right {
+  position: fixed;
+  top: 45%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  width: 550px;
+  height: 550px;
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(48, 47, 47, 0.842);
+  border-radius: 15px;
+}
+
+.price-a {
+  position: fixed;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  font-size: 0.85rem;
+  font-family: Arial, sans-serif;
+  color: rgb(220, 218, 218);
+}
+
+.price-b {
+  position: fixed;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  font-size: 2rem;
+  font-family: Arial, sans-serif;
+  border-radius: 15px;
+  height: 550px;
+  overflow-y: scroll; 
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 85%; /* Adjust the vertical position */
+  left: 50%; /* Adjust the horizontal position */
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+button {
+  width: 200px; /* set a fixed width */
+  height: 50px; /* set a fixed height */
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: rgb(220, 218, 218);
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid #725AC1;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 0 #725AC1;
+}
+button a {
+  text-decoration: none; /* remove underline */
+  color: inherit; /* inherit text color from parent */
+  cursor: inherit; /* inherit cursor style from parent */
+}
+
+button:hover {
+  color: white;
+  box-shadow: inset 0 -100px 0 0 #725AC1;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 1vh;
+}
+
+.maintitle1 {
+  position: fixed;
+  top: 200px; /* Adjust the value as needed */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  font-size: 3rem;
+  font-family: Arial, sans-serif;
+  color: rgb(220, 218, 218);
+  text-shadow: -1px 1px 2px #000,
+      1px 2px 6px #000,
+      1px -1px 0 #000,
+      -1px -1px 0 #000; 
+}
+
+.welcomebox {
+  position: fixed;
+  top: -25px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  width: 600px;
+  height: 250px;
+  backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    background-color: rgba(48, 47, 47, 0.842);
+    border-radius: 15px;
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  font-size: 0.85rem;
+  font-family: Arial, sans-serif;
+  color: rgb(220, 218, 218);
+}
+
+.card2 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    backdrop-filter: blur(25px) saturate(130%);
+    -webkit-backdrop-filter: blur(25px) saturate(130%);
+    background-color: rgba(54, 54, 54, 0.51);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    z-index: -1
+}
+
+.card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  opacity: 0.9;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  overflow: hidden;
+  backdrop-filter: blur(25px) saturate(150%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(7, 24, 56);
+  border-radius: 15px;
+  z-index: -1;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+  height: 1300%;
+  animation: rotBGimg 3s linear infinite;
+  transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  backdrop-filter: blur(25px) saturate(150%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgb(7, 24, 56);
+  border-radius: 15px;
+  ;
+  inset: 5px;
+} 
+
+h2 {
+    color: #4b4b4b;
+  }
+
+
+  a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 25px;
+}
+.social {
+  position: fixed;
+  top: 20px;
+}
+.social ul {
+  padding: 0px;
+  transform: translate(-270px, 0);
+}
+.social ul li {
+  display: block;
+  margin: 5px;
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(48, 47, 47, 0.842);
+  width: 300px;
+  text-align: right;
+  padding: 10px;
+  border-radius: 0 30px 30px 0;
+  transition: all 1s;
+}
+.social ul li:hover {
+  transform: translate(110px, 0);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(48, 47, 47, 0.842);
+}
+.social ul li:hover a {
+  color: #ffffff;
+}
+.social ul li:hover i {
+  color: #fff;
+  background: #725AC1;
+  transform: rotate(360deg);
+  transition: all 1s;
+}
+.social ul li i {
+  margin-left: 10px;
+  color: #000;
+  background: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  background: #ffffff;
+  transform: rotate(0deg);
+}
+
+  
+table {
+    border-collapse: collapse;
+    width: 540px;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    text-align: middle;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+table th {
+    background-color: #705bb1;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+table td {
+    background-color: #e9e6e6f6;
+}
+
+table tr:hover td {
+    background-color: #705bb1;
+}
+
+table td {
+  backdrop-filter: blur(25px) saturate(130%);
+  -webkit-backdrop-filter: blur(25px) saturate(130%);
+  background-color: rgba(48, 47, 47, 0.842);
+  padding: 10px;
+  font-weight: bold;
+  color:rgb(220, 218, 218);
+}
+  </style>
 </head>
 <body>
 
@@ -64,10 +392,16 @@
       </button>
     </a>
   </div>
-  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <nav class="social">
+      <ul> 
+          <li><a href="https://github.com/Roy-Latin/DevOps-Crypto">Github <i class="fa fa-github"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/roy-latin-665216278/">Linkedin <i class="fa fa-linkedin"></i></a></li>
+            </ul>
+      </nav>
+
   <div class="card"></div>
-  
-    
-    
+
 </body>
 </html>
