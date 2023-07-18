@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+    
+     //environment {
+       // EC2_IP_TEST = "52.207.237.140"
+       // EC2_IP_PROD = "54.164.184.153"
+    //}
+
+    stages {
+        stage('Clonnig Git Repo And Cleaning Workspace') {
+            steps {
+                // Clean Up Project Files And Clone Git - To Update The Project
+                sh 'rm -rf *'
+                sh 'git clone https://github.com/Roy-Latin/DevOps-Crypto.git'
+            }
+        }
+
+        stage('Build And Push The Image To Docker Hub') {
+            steps {
+                    //Creates Docker Image
+                    dir('DevOps-Crypto'){
+                    sh 'docker build -t roylatin/devops-crypto:4.${BUILD_NUMBER} -t roylatin/devops-crypto:latest .'
+                    }
+                    //Pushes Docker Image To Docker Hub
+                    sh 'docker push roylatin/devops-crypto:4.${BUILD_NUMBER}'
+                    sh 'docker push roylatin/devops-crypto:latest'
+
+                    // Cleanup old Docker images
+                    sh "docker image ls --format '{{.ID}}' roylatin/devops-crypto --filter 'dangling=false' | sort -r | awk 'NR>3' | xargs -I {} docker image rm -f {}"            
+            }
+        }
+
+        stage('Running K8S On Docker For Dekstop') {
+            steps {
+                // Runs tests from the main machine on the website
+                sh 'kubectl apply -f app-deploy.yml'
+                sh 'kubectl apply -f app-service.yml'
+                sh 'kubectl apply -f db-deploy.yml'
+                sh 'kubectl apply -f db-service.yml'
+                sh 'kubectl apply -f init-job.yml'
+                //sh 'chmod +x DevOps-Crypto/tests.sh'
+                //sh './DevOps-Crypto/tests.sh'
+            }
+        }
+
+        //stage('Running Docker On Prod Server') {
+          //  steps {
+           //     connectToServer(EC2_IP_PROD)
+           // }
+      //  }
+    //}
+//}
