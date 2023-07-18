@@ -9,8 +9,8 @@ def create_database():
     config = {
         'user': 'root',
         'password': 'password',
-        'host': 'db',  # Use the service name as the hostname
-        'database': 'mysql',
+        'host': 'mysql-service',  # Use the service name as the hostname
+        'database': 'crypto',
     }
     connection = mysql.connector.connect(**config)
     cursor = connection.cursor()
@@ -41,7 +41,7 @@ def eth_price_table(name: str, price: float) -> None:
     config = {
     'user': 'root',
     'password': 'password',
-    'host': 'db',  # Use the service name as the hostname
+    'host': 'mysql-service',  # Use the service name as the hostname
     'database': 'crypto',
 }
     connection = mysql.connector.connect(**config)
@@ -60,7 +60,7 @@ def btc_price_table(name: str, price: float) -> None:
     config = {
     'user': 'root',
     'password': 'password',
-    'host': 'db',  # Use the service name as the hostname
+    'host': 'mysql-service',  # Use the service name as the hostname
     'database': 'crypto',
 }
     connection = mysql.connector.connect(**config)
@@ -79,7 +79,7 @@ def xrp_price_table(name: str, price: float) -> None:
     config = {
     'user': 'root',
     'password': 'password',
-    'host': 'db',  # Use the service name as the hostname
+    'host': 'mysql-service',  # Use the service name as the hostname
     'database': 'crypto',
 }
     connection = mysql.connector.connect(**config)
@@ -98,7 +98,7 @@ def ada_price_table(name: str, price: float) -> None:
     config = {
     'user': 'root',
     'password': 'password',
-    'host': 'db',  # Use the service name as the hostname
+    'host': 'mysql-service',  # Use the service name as the hostname
     'database': 'crypto',
 }
     connection = mysql.connector.connect(**config)
@@ -138,7 +138,7 @@ def eth():
     config = {
     'user': 'root',
     'password': 'password',
-    'host': 'db',  # Use the service name as the hostname
+    'host': 'mysql-service',  # Use the service name as the hostname
     'database': 'crypto',
     }
     connection = mysql.connector.connect(**config)
@@ -175,7 +175,7 @@ def btc():
     config = {
     'user': 'root',
     'password': 'password',
-    'host': 'db',  # Use the service name as the hostname
+    'host': 'mysql-service',  # Use the service name as the hostname
     'database': 'crypto',
     }
     connection = mysql.connector.connect(**config)
@@ -212,7 +212,7 @@ def xrp():
     config = {
     'user': 'root',
     'password': 'password',
-    'host': 'db',  # Use the service name as the hostname
+    'host': 'mysql-service',  # Use the service name as the hostname
     'database': 'crypto',
     }
     connection = mysql.connector.connect(**config)
@@ -249,7 +249,7 @@ def ada():
     config = {
     'user': 'root',
     'password': 'password',
-    'host': 'db',  # Use the service name as the hostname
+    'host': 'mysql-service',  # Use the service name as the hostname
     'database': 'crypto',
     }
     connection = mysql.connector.connect(**config)
@@ -267,4 +267,4 @@ def ada():
 
 if __name__ == '__main__':
     create_database()
-    app.run()
+    app.run(host='0.0.0.0')
