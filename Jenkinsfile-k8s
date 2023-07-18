@@ -33,6 +33,7 @@ pipeline {
         stage('Running K8S On Docker For Dekstop') {
             steps {
                 dir('DevOps-Crypto'){
+                    //starts the kubernetes cluster on local docker for desktop 
                     sh 'kubectl apply -f app-deploy.yml'
                     sh 'kubectl apply -f app-service.yml'
                     sh 'kubectl apply -f db-deploy.yml'
@@ -45,9 +46,10 @@ pipeline {
             }
         }
 
-        stage('Shutting Off The Local Cluster') {
+        stage('Shutting Off The Local Cluster After Testing') {
             steps {
                 dir('DevOps-Crypto'){
+                    //turns off the kubernetes cluster on local docker for desktop 
                     sh 'kubectl delete -f app-deploy.yml'
                     sh 'kubectl delete -f app-service.yml'
                     sh 'kubectl delete -f db-deploy.yml'
