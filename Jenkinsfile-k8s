@@ -33,11 +33,11 @@ pipeline {
         stage('Running K8S On Docker For Dekstop') {
             steps {
                 dir('DevOps-Crypto'){
-                sh 'kubectl apply -f app-deploy.yml'
-                sh 'kubectl apply -f app-service.yml'
-                sh 'kubectl apply -f db-deploy.yml'
-                sh 'kubectl apply -f db-service.yml'
-                sh 'kubectl apply -f init-job.yml'
+                    sh 'kubectl apply -f app-deploy.yml'
+                    sh 'kubectl apply -f app-service.yml'
+                    sh 'kubectl apply -f db-deploy.yml'
+                    sh 'kubectl apply -f db-service.yml'
+                    sh 'kubectl apply -f init-job.yml'
                 }
                 // Runs tests from the main machine on the website
                 //sh 'chmod +x DevOps-Crypto/tests.sh'
@@ -46,13 +46,15 @@ pipeline {
         }
 
         stage('Shutting Off The Local Cluster') {
-            dir('DevOps-Crypto'){
-                sh 'kubectl delete -f app-deploy.yml'
-                sh 'kubectl delete -f app-service.yml'
-                sh 'kubectl delete -f db-deploy.yml'
-                sh 'kubectl delete -f db-service.yml'
-                sh 'kubectl delete -f init-job.yml'
+            steps {
+                dir('DevOps-Crypto'){
+                    sh 'kubectl delete -f app-deploy.yml'
+                    sh 'kubectl delete -f app-service.yml'
+                    sh 'kubectl delete -f db-deploy.yml'
+                    sh 'kubectl delete -f db-service.yml'
+                    sh 'kubectl delete -f init-job.yml'
                 }
+            }
         }
 
         //stage('Running Docker On Prod Server') {
