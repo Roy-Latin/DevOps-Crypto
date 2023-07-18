@@ -48,5 +48,5 @@ pipeline {
            //     connectToServer(EC2_IP_PROD)
            // }
       //  }
-    //}
-//}
+    }
+}
