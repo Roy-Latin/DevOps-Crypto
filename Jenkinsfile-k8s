@@ -45,6 +45,16 @@ pipeline {
             }
         }
 
+        stage('Shutting Off The Local Cluster') {
+            dir('DevOps-Crypto'){
+                sh 'kubectl delete -f app-deploy.yml'
+                sh 'kubectl delete -f app-service.yml'
+                sh 'kubectl delete -f db-deploy.yml'
+                sh 'kubectl delete -f db-service.yml'
+                sh 'kubectl delete -f init-job.yml'
+                }
+        }
+
         //stage('Running Docker On Prod Server') {
           //  steps {
            //     connectToServer(EC2_IP_PROD)
