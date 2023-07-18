@@ -32,12 +32,14 @@ pipeline {
 
         stage('Running K8S On Docker For Dekstop') {
             steps {
-                // Runs tests from the main machine on the website
+                dir('DevOps-Crypto'){
                 sh 'kubectl apply -f app-deploy.yml'
                 sh 'kubectl apply -f app-service.yml'
                 sh 'kubectl apply -f db-deploy.yml'
                 sh 'kubectl apply -f db-service.yml'
                 sh 'kubectl apply -f init-job.yml'
+                }
+                // Runs tests from the main machine on the website
                 //sh 'chmod +x DevOps-Crypto/tests.sh'
                 //sh './DevOps-Crypto/tests.sh'
             }
