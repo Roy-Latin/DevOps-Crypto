@@ -1,3 +1,14 @@
+def deployKubernetesResources() {
+    dir('DevOps-Crypto') {
+        // Starts the Kubernetes cluster on local Docker for Desktop
+        sh 'kubectl apply -f db-deploy.yml'
+        sh 'kubectl apply -f db-service.yml'
+        sh 'kubectl apply -f init-job.yml'
+        sh 'kubectl apply -f app-deploy.yml'
+        sh 'kubectl apply -f app-service.yml'
+        sh 'kubectl wait --for=condition=complete job/init-db-job'
+    }
+}
 pipeline {
     agent any
     
@@ -32,19 +43,12 @@ pipeline {
 
         stage('Running K8S On Docker For Dekstop') {
             steps {
-                dir('DevOps-Crypto'){
-                    //starts the kubernetes cluster on local docker for desktop 
-                    sh 'kubectl apply -f db-deploy.yml'
-                    sh 'kubectl apply -f db-service.yml'
-                    sh 'kubectl apply -f init-job.yml'
-                    sh 'kubectl apply -f app-deploy.yml'
-                    sh 'kubectl apply -f app-service.yml'
-                    sh 'kubectl wait --for=condition=complete job/init-db-job'
+                script {
+                    deployKubernetesResources()
                 }
-
                 //Runs tests from the main machine on the website
                 sh 'chmod +x DevOps-Crypto/k8s-tests.sh'
-                sh './DevOps-Crypto/k8s-tests.sh'
+                sh 'bash -x ./DevOps-Crypto/k8s-tests.sh'
             }
         }
 
