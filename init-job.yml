@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: init-db
-          image: mysql:8
+          image: roylatin/dockerdb
           command: ["sh", "-c"]
           args: ["mysql -h mysql-service -u root -ppassword -D crypto < /home/roy/DevOps-Crypto/init.sql"]
           volumeMounts:

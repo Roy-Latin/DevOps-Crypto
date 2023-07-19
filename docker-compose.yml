@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: roylatin/devops-crypto:finalV2
+    image: roylatin/devops-crypto:finalV4
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,6 +12,7 @@ services:
     restart: always
   db:
     image: roylatin/dockerdb
+    container_name: mysql-service
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:

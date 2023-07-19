@@ -39,10 +39,12 @@ pipeline {
                     sh 'kubectl apply -f db-deploy.yml'
                     sh 'kubectl apply -f db-service.yml'
                     sh 'kubectl apply -f init-job.yml'
+                    sh 'kubectl wait --for=condition=complete job/init-db-job'
                 }
-                // Runs tests from the main machine on the website
-                //sh 'chmod +x DevOps-Crypto/tests.sh'
-                //sh './DevOps-Crypto/tests.sh'
+
+                //Runs tests from the main machine on the website
+                sh 'chmod +x DevOps-Crypto/k8s-tests.sh'
+                sh './DevOps-Crypto/k8s-tests.sh'
             }
         }
 
