@@ -9,6 +9,10 @@ def deployKubernetesResources() {
         sh 'kubectl wait --for=condition=complete job/init-db-job'
     }
 }
+def runKubernetesTests() {
+    sh 'chmod +x DevOps-Crypto/k8s-tests.sh'
+    sh 'bash -x ./DevOps-Crypto/k8s-tests.sh'
+}
 pipeline {
     agent any
     
@@ -45,6 +49,9 @@ pipeline {
             steps {
                 script {
                     deployKubernetesResources()
+                     catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                        runKubernetesTests()
+                    }
                 }
                 //Runs tests from the main machine on the website
                 sh 'chmod +x DevOps-Crypto/k8s-tests.sh'
