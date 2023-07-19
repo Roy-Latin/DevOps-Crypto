@@ -12,7 +12,7 @@ if ! curl -s --max-time $timeout 192.168.56.1 | grep -q Crypto; then
   exit 1
 fi
 
-if ! curl -s --max-time $timeout 192.168.56.1/eth | grep -q lalalal; then
+if ! curl -s --max-time $timeout 192.168.56.1/eth | grep -q Price; then
   echo "Error: Pattern 'lalalal' not found"
   exit 1
 fi
