@@ -34,11 +34,11 @@ pipeline {
             steps {
                 dir('DevOps-Crypto'){
                     //starts the kubernetes cluster on local docker for desktop 
-                    sh 'kubectl apply -f app-deploy.yml'
-                    sh 'kubectl apply -f app-service.yml'
                     sh 'kubectl apply -f db-deploy.yml'
                     sh 'kubectl apply -f db-service.yml'
                     sh 'kubectl apply -f init-job.yml'
+                    sh 'kubectl apply -f app-deploy.yml'
+                    sh 'kubectl apply -f app-service.yml'
                     sh 'kubectl wait --for=condition=complete job/init-db-job'
                 }
 
