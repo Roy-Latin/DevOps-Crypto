@@ -2,11 +2,11 @@ def deployKubernetesResources() {
     dir('DevOps-Crypto') {
         // Starts the Kubernetes cluster on local Docker for Desktop
         sh 'gcloud container clusters get-credentials autopilot-cluster-1 --project onyx-seeker-393207 --region us-central1'
+        sh 'kubectl apply -f app-deploy.yml'
+        sh 'kubectl apply -f app-service.yml'
         sh 'kubectl apply -f db-deploy.yml'
         sh 'kubectl apply -f db-service.yml'
         sh 'kubectl apply -f init-job.yml'
-        sh 'kubectl apply -f app-deploy.yml'
-        sh 'kubectl apply -f app-service.yml'
         sh 'kubectl wait --for=condition=complete job/init-db-job'
     }
 }
