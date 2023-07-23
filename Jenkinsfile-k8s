@@ -1,6 +1,7 @@
 def deployKubernetesResources() {
     dir('DevOps-Crypto') {
         // Starts the Kubernetes cluster on local Docker for Desktop
+        sh 'gcloud container clusters get-credentials autopilot-cluster-1 --project onyx-seeker-393207 --region us-central1'
         sh 'kubectl apply -f db-deploy.yml'
         sh 'kubectl apply -f db-service.yml'
         sh 'kubectl apply -f init-job.yml'
@@ -15,12 +16,6 @@ def runKubernetesTests() {
 }
 pipeline {
     agent any
-    
-     //environment {
-       // EC2_IP_TEST = "52.207.237.140"
-       // EC2_IP_PROD = "54.164.184.153"
-    //}
-
     stages {
         stage('Clonnig Git Repo And Cleaning Workspace') {
             steps {
@@ -45,7 +40,7 @@ pipeline {
             }
         }
 
-        stage('Running K8S On Docker For Dekstop') {
+        stage('Running K8S On GCloud') {
             steps {
                 script {
                     deployKubernetesResources()
@@ -53,9 +48,6 @@ pipeline {
                         runKubernetesTests()
                     }
                 }
-                //Runs tests from the main machine on the website
-                sh 'chmod +x DevOps-Crypto/k8s-tests.sh'
-                sh 'bash -x ./DevOps-Crypto/k8s-tests.sh'
             }
         }
 
@@ -63,6 +55,7 @@ pipeline {
             steps {
                 dir('DevOps-Crypto'){
                     //turns off the kubernetes cluster on local docker for desktop 
+                    sh 'gcloud container clusters get-credentials autopilot-cluster-1 --project onyx-seeker-393207 --region us-central1'
                     sh 'kubectl delete -f app-deploy.yml'
                     sh 'kubectl delete -f app-service.yml'
                     sh 'kubectl delete -f db-deploy.yml'
