@@ -11,6 +11,7 @@ echo "Flask pods are Running"
 # Check if the MySQL pod is in the Running state
 while [[ "$(kubectl get pods -l app=mysql -o 'jsonpath={..status.phase}')" != "Running" ]]; do
   echo "MySQL pod are still not Running"
+  sleep 10
 done
 
 echo "MySQL pod are Running"
