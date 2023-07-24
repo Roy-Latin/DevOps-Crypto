@@ -70,8 +70,8 @@ pipeline {
             steps {
                 sh 'gcloud container clusters get-credentials deploy-flask-app --project onyx-seeker-393207 --region us-central1'
                 deployKubernetesResources()
-                sh 'chmod +x DevOps-Crypto/Gcloud-status.sh'
-                sh 'bash DevOps-Crypto/Gcloud-status.sh'
+                sh 'chmod +x DevOps-Crypto/Load-Balancer-IP.sh'
+                sh 'bash DevOps-Crypto/Load-Balancer-IP.sh'
             }
         }
     }
