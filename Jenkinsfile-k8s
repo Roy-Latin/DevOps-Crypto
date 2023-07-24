@@ -52,7 +52,7 @@ pipeline {
             }
         }
 
-        stage('Shutting Off GCloud Test Server') {
+        stage('Shutting Off GCloud Test Cluster') {
             steps {
                 dir('DevOps-Crypto'){
                     //turns off the kubernetes cluster on local docker for desktop 
@@ -66,7 +66,7 @@ pipeline {
             }
         }
 
-        stage('Running Docker On Prod Server') {
+        stage('Running K8S On GCloud Prod Cluster') {
             steps {
                 sh 'gcloud container clusters get-credentials deploy-flask-app --project onyx-seeker-393207 --region us-central1'
                 deployKubernetesResources()
