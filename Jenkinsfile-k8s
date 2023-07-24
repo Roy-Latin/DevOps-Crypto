@@ -7,7 +7,9 @@ def deployKubernetesResources() {
         sh 'kubectl apply -f db-deploy.yml'
         sh 'kubectl apply -f db-service.yml'
         sh 'kubectl apply -f init-job.yml'
-        sh 'kubectl wait --for=condition=complete job/init-db-job'
+        sh 'kubectl wait --for=condition=Running pod/flask-app'
+        sh 'chmod +x DevOps-Crypto/Load-Balancer-Check.sh'
+        sh 'bash -x DevOps-Crypto/Load-Balancer-Check.sh'
     }
 }
 def runKubernetesTests() {
@@ -51,19 +53,19 @@ pipeline {
             }
         }
 
-        stage('Shutting Off The Local Cluster After Testing') {
-            steps {
-                dir('DevOps-Crypto'){
+        //stage('Shutting Off The Local Cluster After Testing') {
+           // steps {
+               // dir('DevOps-Crypto'){
                     //turns off the kubernetes cluster on local docker for desktop 
-                    sh 'gcloud container clusters get-credentials autopilot-cluster-1 --project onyx-seeker-393207 --region us-central1'
-                    sh 'kubectl delete -f app-deploy.yml'
-                    sh 'kubectl delete -f app-service.yml'
-                    sh 'kubectl delete -f db-deploy.yml'
-                    sh 'kubectl delete -f db-service.yml'
-                    sh 'kubectl delete -f init-job.yml'
-                }
-            }
-        }
+                   // sh 'gcloud container clusters get-credentials autopilot-cluster-1 --project onyx-seeker-393207 --region us-central1'
+                   // sh 'kubectl delete -f app-deploy.yml'
+                  //  sh 'kubectl delete -f app-service.yml'
+                   // sh 'kubectl delete -f db-deploy.yml'
+                  //  sh 'kubectl delete -f db-service.yml'
+                   // sh 'kubectl delete -f init-job.yml'
+              //  }
+           // }
+      //  }
 
         //stage('Running Docker On Prod Server') {
           //  steps {
