@@ -6,6 +6,7 @@ def deployKubernetesResources() {
         sh 'kubectl apply -f db-deploy.yml'
         sh 'kubectl apply -f db-service.yml'
         sh 'kubectl apply -f init-job.yml'
+        sh 'kubectl rollout restart deployment/flask-app'
         sh 'chmod +x Gcloud-status.sh'
         sh 'bash Gcloud-status.sh'
     }
