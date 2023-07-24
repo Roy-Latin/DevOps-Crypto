@@ -1,7 +1,6 @@
 def deployKubernetesResources() {
     dir('DevOps-Crypto') {
         // Starts the Kubernetes cluster on local Docker for Desktop
-        sh 'gcloud container clusters get-credentials autopilot-cluster-1 --project onyx-seeker-393207 --region us-central1'
         sh 'kubectl apply -f app-deploy.yml'
         sh 'kubectl apply -f app-service.yml'
         sh 'kubectl apply -f db-deploy.yml'
@@ -43,6 +42,7 @@ pipeline {
 
         stage('Running K8S On GCloud Test Cluster') {
             steps {
+                sh 'gcloud container clusters get-credentials autopilot-cluster-1 --project onyx-seeker-393207 --region us-central1'
                 script {
                     deployKubernetesResources()
                      catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
@@ -66,10 +66,13 @@ pipeline {
             }
         }
 
-        //stage('Running Docker On Prod Server') {
-          //  steps {
-           //     connectToServer(EC2_IP_PROD)
-           // }
-      //  }
+        stage('Running Docker On Prod Server') {
+            steps {
+                sh 'gcloud container clusters get-credentials deploy-flask-app --project onyx-seeker-393207 --region us-central1'
+                deployKubernetesResources()
+                sh 'chmod +x Gcloud-status.sh'
+                sh 'bash Gcloud-status.sh'
+            }
+        }
     }
 }

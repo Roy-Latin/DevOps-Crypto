@@ -21,7 +21,7 @@ if [ -z "$CLUSTER_IP" ]; then
 fi
 
 echo "LoadBalancer IP: $CLUSTER_IP"
-# Continue with your script logic after obtaining the LoadBalancer IP
+
 
 sleep 25
 
