@@ -6,10 +6,8 @@ def deployKubernetesResources() {
         sh 'kubectl apply -f app-service.yml'
         sh 'kubectl apply -f db-deploy.yml'
         sh 'kubectl apply -f db-service.yml'
-        sh 'kubectl apply -f init-job.yml'
-        sh 'kubectl wait --for=condition=Running pod/flask-app'
-        sh 'chmod +x DevOps-Crypto/Load-Balancer-Check.sh'
-        sh 'bash -x DevOps-Crypto/Load-Balancer-Check.sh'
+        sh 'chmod +x DevOps-Crypto/Gcloud-status.sh'
+        sh 'bash -x DevOps-Crypto/Gcloud-status.sh'
     }
 }
 def runKubernetesTests() {

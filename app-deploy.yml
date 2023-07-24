@@ -26,3 +26,10 @@ spec:
               value: password  # Replace with your MySQL password
             - name: MYSQL_DATABASE
               value: crypto  # Replace with your MySQL database name
+          resources:
+            requests:
+              cpu: "500m"    
+              memory: "1Gi" 
+            limits:
+              cpu: "1000m"    
+              memory: "2Gi"   
