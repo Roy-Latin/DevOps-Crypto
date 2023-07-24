@@ -6,8 +6,9 @@ def deployKubernetesResources() {
         sh 'kubectl apply -f app-service.yml'
         sh 'kubectl apply -f db-deploy.yml'
         sh 'kubectl apply -f db-service.yml'
-        sh 'chmod +x DevOps-Crypto/Gcloud-status.sh'
-        sh 'bash -x DevOps-Crypto/Gcloud-status.sh'
+        sh 'kubectl apply -f init-job.yml'
+        sh 'chmod +x Gcloud-status.sh'
+        sh 'bash Gcloud-status.sh'
     }
 }
 def runKubernetesTests() {
