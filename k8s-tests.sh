@@ -23,10 +23,10 @@ fi
 echo "LoadBalancer IP: $CLUSTER_IP"
 # Continue with your script logic after obtaining the LoadBalancer IP
 
-sleep 15
+sleep 25
 
 # Set the timeout value (in seconds)
-timeout=15
+timeout=25
 
 # Make curl requests with a timeout
 curl -s --max-time $timeout $CLUSTER_IP
