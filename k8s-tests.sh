@@ -20,9 +20,6 @@ if [ -z "$CLUSTER_IP" ]; then
     exit 1
 fi
 
-echo "LoadBalancer IP: $CLUSTER_IP"
-
-
 sleep 25
 
 # Set the timeout value (in seconds)

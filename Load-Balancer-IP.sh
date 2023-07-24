@@ -20,4 +20,4 @@ if [ -z "$CLUSTER_IP" ]; then
     exit 1
 fi
 
-echo "All Set, Crypto Flask App IP: $CLUSTER_IP"
+echo "All Set, Crypto Flask App IP: http://$CLUSTER_IP"

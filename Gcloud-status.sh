@@ -2,18 +2,18 @@
 
 # Check if all Flask pods are in the Running state
 while [[ "$(kubectl get pods -l app=flask-app -o 'jsonpath={..status.phase}')" != "Running Running" ]]; do
-  echo "Flask pods are still not Running"
+  echo "Flask pods are still not Running..."
   sleep 10
 done
 
-echo "Flask pods are Running"
+echo "Flask pods are Running!"
 
 # Check if the MySQL pod is in the Running state
 while [[ "$(kubectl get pods -l app=mysql -o 'jsonpath={..status.phase}')" != "Running" ]]; do
-  echo "MySQL pod are still not Running"
+  echo "MySQL pod is still not Running..."
   sleep 10
 done
 
-echo "MySQL pod are Running"
+echo "MySQL pod is Running!"
 
-echo "Pods are all Running"
+echo "All pods are Running!!"
