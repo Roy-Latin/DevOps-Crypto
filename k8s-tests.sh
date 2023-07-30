@@ -34,20 +34,28 @@ if ! curl -s --max-time $timeout $CLUSTER_IP | grep -q Crypto; then
   exit 1
 fi
 
+sleep 15
+
 if ! curl -s --max-time $timeout $CLUSTER_IP/eth | grep -q Price; then
   echo "Error: Pattern 'Price' not found"
   exit 1
 fi
+
+sleep 15
 
 if ! curl -s --max-time $timeout $CLUSTER_IP/btc | grep -q Price; then
   echo "Error: Pattern 'Price' not found"
   exit 1
 fi
 
+sleep 15
+
 if ! curl -s --max-time $timeout $CLUSTER_IP/ada | grep -q Price; then
   echo "Error: Pattern 'Price' not found"
   exit 1
 fi
+
+sleep 15
 
 if ! curl -s --max-time $timeout $CLUSTER_IP/xrp | grep -q Price; then
   echo "Error: Pattern 'Price' not found"
