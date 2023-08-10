@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-db-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: init-db
+          image: roylatin/dockerdb
+          command: ["sh", "-c"]
+          args: ["mysql -h mysql-service -u root -ppassword -D crypto < /home/roy/DevOps-Crypto/init.sql"]
+          volumeMounts:
+            - name: init-script
+              mountPath: /home/roy/DevOps-Crypto/init.sql
+              subPath: init.sql
+      restartPolicy: Never
+      volumes:
+        - name: init-script
+          configMap:
+            name: init-script-configmap
+            items:
+              - key: init.sql
+                path: init.sql

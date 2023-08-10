@@ -36,7 +36,7 @@ pipeline {
             steps {
                     //Creates Docker Image
                     dir('DevOps-Crypto'){
-                    sh 'docker build -t roylatin/devops-crypto:1.${BUILD_NUMBER} -t roylatin/devops-crypto:latest .'
+                    sh 'docker build -t roylatin/devops-crypto:1.${BUILD_NUMBER} -t roylatin/devops-crypto:latest crypto-app/'
                     }
                     //Pushes Docker Image To Docker Hub
                     sh 'docker push roylatin/devops-crypto:1.${BUILD_NUMBER}'
@@ -51,8 +51,8 @@ pipeline {
             steps {
                 connectToServer(EC2_IP_TEST)
                 // Runs tests from the main machine on the website
-                sh 'chmod +x DevOps-Crypto/tests.sh'
-                sh './DevOps-Crypto/tests.sh'
+                sh 'chmod +x DevOps-Crypto/scripts/tests.sh'
+                sh './DevOps-Crypto/scripts/tests.sh'
             }
         }
 

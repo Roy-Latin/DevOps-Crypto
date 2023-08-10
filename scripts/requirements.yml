@@ -49,7 +49,7 @@
    
     - name: Copy flaskapp.service file
       copy:
-        src: "flask_startup_template.j2"
+        src: "DevOps-Crypto/scripts/requirements.yml"
         dest: "/etc/systemd/system/flaskapp.service"
 
     - name: Reload systemd daemon

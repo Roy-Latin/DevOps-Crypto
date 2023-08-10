@@ -34,12 +34,12 @@ pipeline {
                     sshagent(['aws-key-ssh']) {
                     sh """ 
                     ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_TEST '
-                    chmod +x DevOps-Crypto/setup.sh
-                    ./DevOps-Crypto/setup.sh
+                    chmod +x DevOps-Crypto/scripts/setup.sh
+                    ./DevOps-Crypto/scripts/setup.sh
                     '
                     """
-                    sh 'chmod +x DevOps-Crypto/tests.sh'
-                    sh './DevOps-Crypto/tests.sh'
+                    sh 'chmod +x DevOps-Crypto/scripts/tests.sh'
+                    sh './DevOps-Crypto/scripts/tests.sh'
 
                 }
             }
@@ -55,8 +55,8 @@ pipeline {
                     sshagent(['aws-key-ssh']) {
                     sh """ 
                     ssh -o StrictHostKeyChecking=no -i $KEY_FILE ec2-user@$EC2_IP_PROD '
-                    chmod +x DevOps-Crypto/setup.sh
-                    ./DevOps-Crypto/setup.sh
+                    chmod +x DevOps-Crypto/scripts/setup.sh
+                    ./DevOps-Crypto/scripts/setup.sh
                     '
                     """
                 }

@@ -2,37 +2,37 @@ def deployKubernetesResources() {
     dir('DevOps-Crypto') {
         // Starts the Kubernetes cluster on local Docker for Desktop
         // Aplyying all the needed yaml files
-        sh 'kubectl apply -f app-deploy.yml'
-        sh 'kubectl apply -f app-service.yml'
-        sh 'kubectl apply -f db-deploy.yml'
-        sh 'kubectl apply -f db-service.yml'
-        sh 'kubectl apply -f init-job.yml'
+        sh 'kubectl apply -f k8s-yaml-files/app-deploy.yml'
+        sh 'kubectl apply -f k8s-yaml-files/app-service.yml'
+        sh 'kubectl apply -f k8s-yaml-files/db-deploy.yml'
+        sh 'kubectl apply -f k8s-yaml-files/b-service.yml'
+        sh 'kubectl apply -f k8s-yaml-files/init-job.yml'
         // Using rollout to start update to pods 
         sh 'kubectl rollout restart deployment/flask-app'
         // Checks everything is up befor moving on
-        sh 'chmod +x Gcloud-status.sh'
-        sh 'bash Gcloud-status.sh'
+        sh 'chmod +x scripts/Gcloud-status.sh'
+        sh 'bash scripts/Gcloud-status.sh'
     }
 }
 def deleteKubernetesResources() {
     dir('DevOps-Crypto'){
         // Removes all yaml files to make sure the cluster is empty
-        sh 'kubectl delete -f app-deploy.yml'
-        sh 'kubectl delete -f app-service.yml'
-        sh 'kubectl delete -f db-deploy.yml'
-        sh 'kubectl delete -f db-service.yml'
-        sh 'kubectl delete -f init-job.yml'
+        sh 'kubectl delete -f k8s-yaml-files/app-deploy.yml'
+        sh 'kubectl delete -f k8s-yaml-files/app-service.yml'
+        sh 'kubectl delete -f k8s-yaml-files/db-deploy.yml'
+        sh 'kubectl delete -f k8s-yaml-files/db-service.yml'
+        sh 'kubectl delete -f k8s-yaml-files/init-job.yml'
     }
 }
 def runKubernetesTests() {
     // Gets the test cluster ip and runs test
-    sh 'chmod +x DevOps-Crypto/k8s-tests.sh'
-    sh 'bash ./DevOps-Crypto/k8s-tests.sh'
+    sh 'chmod +x DevOps-Crypto/scripts/k8s-tests.sh'
+    sh 'bash ./DevOps-Crypto/scripts/k8s-tests.sh'
 }
 def getClusterIP() {
     // Gets the prod cluster ip and showes it at the end of the pipeline
-    sh 'chmod +x DevOps-Crypto/Load-Balancer-IP.sh'
-    sh 'bash DevOps-Crypto/Load-Balancer-IP.sh'
+    sh 'chmod +x DevOps-Crypto/scripts/Load-Balancer-IP.sh'
+    sh 'bash DevOps-Crypto/scripts/Load-Balancer-IP.sh'
 }
 pipeline {
     agent any
@@ -49,7 +49,7 @@ pipeline {
             steps {
                     // Creates Docker Image
                     dir('DevOps-Crypto'){
-                    sh 'docker build -t roylatin/devops-crypto:4.${BUILD_NUMBER} -t roylatin/devops-crypto:latest .'
+                    sh 'docker build -t roylatin/devops-crypto:4.${BUILD_NUMBER} -t roylatin/devops-crypto:latest crypto-app/'
                     }
                     // Pushes Docker Image To Docker Hub - creates a image with a build number and latest
                     sh 'docker push roylatin/devops-crypto:4.${BUILD_NUMBER}'

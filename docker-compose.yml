@@ -4,7 +4,7 @@ services:
     image: roylatin/devops-crypto:finalV4
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: crypto-app/Dockerfile
     ports:
       - "5000:5000"
     depends_on:
