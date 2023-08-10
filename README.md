@@ -1,3 +1,2 @@
 # DevOps-Crypto
-DevOps crypto site 
-First site to watch crypto currencys value
+Crypto site project for a DevOps course.
