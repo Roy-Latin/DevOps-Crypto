@@ -5,7 +5,7 @@ def deployKubernetesResources() {
         sh 'kubectl apply -f k8s-yaml-files/app-deploy.yml'
         sh 'kubectl apply -f k8s-yaml-files/app-service.yml'
         sh 'kubectl apply -f k8s-yaml-files/db-deploy.yml'
-        sh 'kubectl apply -f k8s-yaml-files/b-service.yml'
+        sh 'kubectl apply -f k8s-yaml-files/db-service.yml'
         sh 'kubectl apply -f k8s-yaml-files/init-job.yml'
         // Using rollout to start update to pods 
         sh 'kubectl rollout restart deployment/flask-app'
