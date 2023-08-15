@@ -1,0 +1,104 @@
+def deployKubernetesResources() {
+    def releaseName = "crypto-helm"
+
+    dir('DevOps-Crypto') {
+        sh "helm repo update"
+        
+        // Check if the Helm release already exists
+        def releaseStatus = sh(
+            script: "helm status $releaseName",
+            returnStatus: true
+        ).trim()
+
+        if (releaseStatus == 0) {
+            echo "Helm release '$releaseName' already exists. Upgrading..."
+            sh "helm upgrade $releaseName my-flask-app/"
+        } else {
+            echo "Helm release '$releaseName' doesn't exist. Installing..."
+            sh "helm install $releaseName my-flask-app/"
+        }
+        // Checks everything is up befor moving on
+        sh 'chmod +x scripts/Gcloud-status.sh'
+        sh 'bash scripts/Gcloud-status.sh'
+    }
+}
+def deleteKubernetesResources() {
+    dir('DevOps-Crypto'){
+        // Removes all yaml files to make sure the cluster is empty
+        sh "helm uninstall crypto-helm my-flask-app/ "
+    }
+}
+def runKubernetesTests() {
+    // Gets the test cluster ip and runs test
+    sh 'chmod +x DevOps-Crypto/scripts/k8s-tests.sh'
+    sh 'bash ./DevOps-Crypto/scripts/k8s-tests.sh'
+}
+def getClusterIP() {
+    // Gets the prod cluster ip and showes it at the end of the pipeline
+    sh 'chmod +x DevOps-Crypto/scripts/Load-Balancer-IP.sh'
+    sh 'bash DevOps-Crypto/scripts/Load-Balancer-IP.sh'
+}
+pipeline {
+    agent any
+    stages {
+        stage('Clonnig Git Repo And Cleaning Workspace') {
+            steps {
+                // Clean Up Project Files And Clone Git - To Update The Project
+                sh 'rm -rf *'
+                sh 'git clone https://github.com/Roy-Latin/DevOps-Crypto.git'
+            }
+        }
+
+        stage('Build And Push The Image To Docker Hub') {
+            steps {
+                    // Creates Docker Image
+                    dir('DevOps-Crypto'){
+                    sh 'docker build -t roylatin/devops-crypto:5.${BUILD_NUMBER} -t roylatin/devops-crypto:latest crypto-app/'
+                    }
+                    // Pushes Docker Image To Docker Hub - creates a image with a build number and latest
+                    sh 'docker push roylatin/devops-crypto:4.${BUILD_NUMBER}'
+                    sh 'docker push roylatin/devops-crypto:latest'
+
+                    // Cleanup old Docker images
+                    sh "docker image ls --format '{{.ID}}' roylatin/devops-crypto --filter 'dangling=false' | sort -r | awk 'NR>3' | xargs -I {} docker image rm -f {}" 
+                    sh "chmod +x DevOps-Crypto/scripts/helm-versions.sh"
+                    sh "./DevOps-Crypto/scripts/helm-versions.sh"   
+                    sh "helm package DevOps-Crypto/my-flask-app"
+                    sh "gsutil cp my-flask-app-0.1.${BUILD_NUMBER}.tgz gs://helm-crypto-k8s/charts/" 
+                    sh "rm DevOps-Crypto/my-flask-app/my-flask-app-0.1.${BUILD_NUMBER}.tgz"    
+            }
+        }
+
+        stage('Running K8S On GCloud Test Cluster') {
+            steps {
+                // Switches to the test cluster
+                sh 'gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1'
+                script {
+                    // Starts the cluster
+                    deployKubernetesResources()
+                     catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                        runKubernetesTests()
+                    }
+                }
+            }
+        }
+
+        stage('Shutting Off GCloud Test Cluster') {
+            steps {
+                // Turns off the cluster 
+                sh 'gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1'
+                deleteKubernetesResources()
+            }
+        }
+
+        stage('Running K8S On GCloud Prod Cluster') {
+            steps {
+                // Switch to the prod cluster 
+                sh 'gcloud container clusters get-credentials k8s-prod --project onyx-seeker-393207 --region us-central1'
+                // Starts cluster and get the ip at the end
+                deployKubernetesResources()
+                getClusterIP()
+            }
+        }
+    }
+}
