@@ -65,7 +65,7 @@ pipeline {
                     sh "./DevOps-Crypto/scripts/helm-versions.sh"   
                     sh "helm package DevOps-Crypto/my-flask-app"
                     sh "gsutil cp my-flask-app-0.1.${BUILD_NUMBER}.tgz gs://helm-crypto-k8s/charts/" 
-                    sh "rm DevOps-Crypto/my-flask-app/my-flask-app-0.1.${BUILD_NUMBER}.tgz"    
+                    sh "rm my-flask-app-0.1.${BUILD_NUMBER}.tgz"    
             }
         }
 
