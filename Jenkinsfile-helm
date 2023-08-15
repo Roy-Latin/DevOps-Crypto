@@ -16,12 +16,12 @@ def deployKubernetesResources() {
             echo "Helm release '$releaseName' doesn't exist or an error occurred."
         }
 
-        if (releaseStatus == 0) {
+        if (releaseStatus != 0) {
             echo "Helm release '$releaseName' already exists. Upgrading..."
-            sh "helm upgrade $releaseName my-flask-app/"
+            sh "helm install $releaseName my-flask-app/"
         } else {
             echo "Helm release '$releaseName' doesn't exist. Installing..."
-            sh "helm install $releaseName my-flask-app/"
+            sh "helm upgrade $releaseName my-flask-app/"
         }
         // Checks everything is up before moving on
         sh 'chmod +x scripts/Gcloud-status.sh'
