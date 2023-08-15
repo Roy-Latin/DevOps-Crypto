@@ -1,28 +1,27 @@
 def deployKubernetesResources() {
     dir('DevOps-Crypto') {
         sh 'chmod +x scripts/helm-status.sh'
-        sh './scripts/helm-status.sh'
+        sh 'bash scripts/helm-status.sh'
         // Checks everything is up before moving on
         sh 'chmod +x scripts/Gcloud-status.sh'
-        sh './scripts/Gcloud-status.sh'
+        sh 'bash scripts/Gcloud-status.sh'
     }
 }
 
 def deleteKubernetesResources() {
-    dir('DevOps-Crypto'){
         // Removes all yaml files to make sure the cluster is empty
-        sh "helm uninstall crypto-helm my-flask-app/ "
-    }
+        sh "helm uninstall crypto-helm"
+        sh 'gcloud container clusters resize k8s-test --size=0 --zone=us-central1-c --quiet'
 }
 def runKubernetesTests() {
     // Gets the test cluster ip and runs test
     sh 'chmod +x DevOps-Crypto/scripts/k8s-tests.sh'
-    sh './DevOps-Crypto/scripts/k8s-tests.sh'
+    sh 'bash DevOps-Crypto/scripts/k8s-tests.sh'
 }
 def getClusterIP() {
     // Gets the prod cluster ip and showes it at the end of the pipeline
     sh 'chmod +x DevOps-Crypto/scripts/Load-Balancer-IP.sh'
-    sh './DevOps-Crypto/scripts/Load-Balancer-IP.sh'
+    sh 'bash DevOps-Crypto/scripts/Load-Balancer-IP.sh'
 }
 pipeline {
     agent any
@@ -77,7 +76,6 @@ pipeline {
                 // Turns off the cluster 
                 sh 'gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c'
                 deleteKubernetesResources()
-                sh 'gcloud container clusters resize k8s-test --size=0 --zone=us-central1-c --quiet'
             }
         }
 
