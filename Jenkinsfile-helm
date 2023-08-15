@@ -5,10 +5,16 @@ def deployKubernetesResources() {
         sh "helm repo update"
         
         // Check if the Helm release already exists
-        def releaseStatus = sh(
-            script: "helm status $releaseName",
-            returnStatus: true
-        ).trim()
+        def releaseStatus = 0
+        try {
+            releaseStatus = sh(
+                script: "helm status $releaseName",
+                returnStatus: true
+            ).trim()
+        } catch (Exception e) {
+            // Helm release doesn't exist or an error occurred (including Helm not being installed)
+            echo "Helm release '$releaseName' doesn't exist or an error occurred."
+        }
 
         if (releaseStatus == 0) {
             echo "Helm release '$releaseName' already exists. Upgrading..."
@@ -17,11 +23,12 @@ def deployKubernetesResources() {
             echo "Helm release '$releaseName' doesn't exist. Installing..."
             sh "helm install $releaseName my-flask-app/"
         }
-        // Checks everything is up befor moving on
+        // Checks everything is up before moving on
         sh 'chmod +x scripts/Gcloud-status.sh'
         sh 'bash scripts/Gcloud-status.sh'
     }
 }
+
 def deleteKubernetesResources() {
     dir('DevOps-Crypto'){
         // Removes all yaml files to make sure the cluster is empty
