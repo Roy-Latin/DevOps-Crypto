@@ -1,31 +1,10 @@
 def deployKubernetesResources() {
-    def releaseName = "crypto-helm"
-
     dir('DevOps-Crypto') {
-        sh "helm repo update"
-        
-        // Check if the Helm release already exists
-        def releaseStatus = 0
-        try {
-            releaseStatus = sh(
-                script: "helm status $releaseName",
-                returnStatus: true
-            ).trim()
-        } catch (Exception e) {
-            // Helm release doesn't exist or an error occurred (including Helm not being installed)
-            echo "Helm release '$releaseName' doesn't exist or an error occurred."
-        }
-
-        if (releaseStatus != 0) {
-            echo "Helm release '$releaseName' already exists. Upgrading..."
-            sh "helm upgrade $releaseName my-flask-app/"
-        } else {
-            echo "Helm release '$releaseName' doesn't exist. Installing..."
-            sh "helm install $releaseName my-flask-app/"
-        }
+        sh 'chmod +x scripts/helm-status.sh'
+        sh './scripts/helm-status.sh'
         // Checks everything is up before moving on
         sh 'chmod +x scripts/Gcloud-status.sh'
-        sh 'bash scripts/Gcloud-status.sh'
+        sh './scripts/Gcloud-status.sh'
     }
 }
 
@@ -38,12 +17,12 @@ def deleteKubernetesResources() {
 def runKubernetesTests() {
     // Gets the test cluster ip and runs test
     sh 'chmod +x DevOps-Crypto/scripts/k8s-tests.sh'
-    sh 'bash ./DevOps-Crypto/scripts/k8s-tests.sh'
+    sh './DevOps-Crypto/scripts/k8s-tests.sh'
 }
 def getClusterIP() {
     // Gets the prod cluster ip and showes it at the end of the pipeline
     sh 'chmod +x DevOps-Crypto/scripts/Load-Balancer-IP.sh'
-    sh 'bash DevOps-Crypto/scripts/Load-Balancer-IP.sh'
+    sh './DevOps-Crypto/scripts/Load-Balancer-IP.sh'
 }
 pipeline {
     agent any
