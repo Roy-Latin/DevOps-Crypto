@@ -96,7 +96,7 @@ pipeline {
         stage('Shutting Off GCloud Test Cluster') {
             steps {
                 // Turns off the cluster 
-                sh 'gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1'
+                sh 'gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c'
                 deleteKubernetesResources()
                 sh 'gcloud container clusters resize k8s-test --size=0 --zone=us-central1-c --quiet'
             }
