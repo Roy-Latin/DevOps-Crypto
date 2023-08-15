@@ -56,7 +56,7 @@ pipeline {
                     sh 'docker build -t roylatin/devops-crypto:5.${BUILD_NUMBER} -t roylatin/devops-crypto:latest crypto-app/'
                     }
                     // Pushes Docker Image To Docker Hub - creates a image with a build number and latest
-                    sh 'docker push roylatin/devops-crypto:4.${BUILD_NUMBER}'
+                    sh 'docker push roylatin/devops-crypto:5.${BUILD_NUMBER}'
                     sh 'docker push roylatin/devops-crypto:latest'
 
                     // Cleanup old Docker images
