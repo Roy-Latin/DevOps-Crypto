@@ -1,5 +1,6 @@
 def deployKubernetesResources() {
     dir('DevOps-Crypto') {
+        sh 'helm repo update'
         // Checks the status of the helm repo to see if its installed or not 
         sh 'chmod +x scripts/helm-status.sh'
         sh 'bash scripts/helm-status.sh'
