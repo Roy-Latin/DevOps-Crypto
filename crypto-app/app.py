@@ -202,9 +202,9 @@ def xrp():
     # Extract the xrp price from the API response
     if xrp_response.status_code == 200:
         xrp_data = xrp_response.json()
-        xrp_price = xrp_data[5]["market_data"]["current_price"]["usd"]
-        xrp_price_h24 = xrp_data[5]["market_data"]["high_24h"]["usd"]
-        xrp_price_l24 = xrp_data[5]["market_data"]["low_24h"]["usd"]
+        xrp_price = xrp_data[4]["market_data"]["current_price"]["usd"]
+        xrp_price_h24 = xrp_data[4]["market_data"]["high_24h"]["usd"]
+        xrp_price_l24 = xrp_data[4]["market_data"]["low_24h"]["usd"]
 
     # Update the price_table with the Ethereum price data
     xrp_price_table("Ripple", xrp_price)
