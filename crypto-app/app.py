@@ -118,7 +118,7 @@ def home_page():
     return render_template("HomePage.html")
 
 @app.route("/about")
-def home_page():
+def about():
     return render_template("About.html")
 
 @app.route("/eth")
