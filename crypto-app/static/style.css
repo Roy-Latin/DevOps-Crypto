@@ -170,8 +170,8 @@ button:active {
 
 .maintitle2 {
   position: fixed;
-  top: 300px; /* Adjust the value as needed */
-  left: 25%;
+  top: 10%; /* Adjust the value as needed */
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
@@ -208,25 +208,25 @@ button:active {
 
 .welcomebox2 {
   position: fixed;
-  top: 250px;
-  left: -160px;
-  text-align: left;
+  top: 200px;
+  left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  padding: 15px;
   width: 900px;
-  height: 350px;
+  height: 100px;
+  font-size: 0.6rem;
   font-family: Gill Sans, sans-serif;
 }
 
 .content2 {
   position: fixed;
-  top: 30%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  text-align: center;
-  font-size: 0.47rem;
+  width: 500px;
+  text-align: left;
+  font-size: 0.6rem;
   font-family: Gill Sans, sans-serif;
   color: rgb(220, 218, 218);
 }
