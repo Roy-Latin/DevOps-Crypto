@@ -2,10 +2,12 @@
 <html>
 <head>
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-  <title>Crypto Tracker - Ethereum</title>
+  <title>Crypto Tracker - ETH</title>
   <link rel="icon" type="image/png" href="https://img.icons8.com/pastel-glyph/128/ethereum--v2.png">
 </head>
 <body>
+
+<div class="card2">
 
   <div class="container-b">
     <div class="square-left">
@@ -33,15 +35,16 @@
         <h1>Ethereum Price:</h1>
         <h1>{{ eth_price }}$</h1>
         <h2>__________________________________</h2>
-        <h1>Ethereum Price high 24 hours:</h1>
+        <h1>Ethereum Price Highest Last 24 Hours:</h1>
         <h1>{{ eth_price_h24 }}$</h1>
         <h2>__________________________________</h2>
-        <h1>Ethereum Price low 24 hours:</h1>
+        <h1>Ethereum Price Lowest Last 24 Hours:</h1>
         <h1>{{ eth_price_l24 }}$</h1>
         <h2>__________________________________</h2>
       </div>
     </div>
   </div>
+</div>
 
   
   <div class="button-container">
@@ -75,6 +78,10 @@
     </a>
   </div>
 
+  <div class="toptitle">
+    <h1>Crypto Tracker</h1>
+  </div>
+
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <nav class="social">
       <ul> 
@@ -83,7 +90,6 @@
             </ul>
       </nav>
 
-  <div class="card"></div>
 
 </body>
 </html>

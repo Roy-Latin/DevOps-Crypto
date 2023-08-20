@@ -1,6 +1,6 @@
 body {
   background-size: cover;
-  background-image: url('https://images.hdqwalls.com/download/gradient-noise-8k-ws-3840x2400.jpg');
+  background-image: url("../static/6166234_17450.jpeg");
   color: white;
 }
         
@@ -25,8 +25,8 @@ code {
 
 .square-left {
   position: fixed;
-  top: 45%;
-  left: 70%;
+  top: 50%;
+  left: 75%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
   width: 550px;
@@ -35,15 +35,15 @@ code {
 
 .square-right {
   position: fixed;
-  top: 45%;
-  left: 30%;
+  top: 50%;
+  left: 25%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
   width: 550px;
   height: 550px;
   backdrop-filter: blur(25px) saturate(200%);
   -webkit-backdrop-filter: blur(25px) saturate(200%);
-  background-color: rgba(48, 47, 47, 0.842);
+  background-color: rgba(136, 135, 135, 0.302);
   border-radius: 15px;
 }
 
@@ -55,7 +55,7 @@ code {
   z-index: 2;
   text-align: center;
   font-size: 0.85rem;
-  font-family: Arial, sans-serif;
+  font-family: Gill Sans, sans-serif;
   color: rgb(220, 218, 218);
 }
 
@@ -67,20 +67,24 @@ code {
   z-index: 2;
   text-align: center;
   font-size: 2rem;
-  font-family: Arial, sans-serif;
+  font-family: Gill Sans, sans-serif;
   border-radius: 15px;
   height: 550px;
   overflow-y: scroll; 
 }
 
 .button-container {
-  display: flex;
-  align-items: center;
   position: fixed;
-  top: 85%; /* Adjust the vertical position */
+  padding: 5px;
+  top: 40px; /* Adjust the vertical position */
   left: 50%; /* Adjust the horizontal position */
+  width: 10000px;
   transform: translate(-50%, -50%);
   text-align: center;
+  backdrop-filter: blur(25px) saturate(130%);
+    -webkit-backdrop-filter: blur(25px) saturate(130%);
+    background-color: rgba(54, 54, 54, 0.51);
+    border-radius: 15px;
 }
 button {
   width: 200px; /* set a fixed width */
@@ -92,6 +96,7 @@ button {
   font-size: 18px;
   letter-spacing: 1px;
   text-decoration: none;
+  font-family: Gill Sans, sans-serif;
   color: rgb(220, 218, 218);
   background: transparent;
   cursor: pointer;
@@ -119,10 +124,26 @@ button:active {
   display: flex;
   align-items: center;
   position: fixed;
-  top: 91%; /* Adjust the vertical position */
-  left: 50%; /* Adjust the horizontal position */
+  top: 40px; /* Adjust the vertical position */
+  left: 93%; /* Adjust the horizontal position */
   transform: translate(-50%, -50%);
   text-align: center;
+  font-family: Gill Sans, sans-serif;
+}
+
+.toptitle {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 40px; /* Adjust the vertical position */
+  left: 8%; /* Adjust the horizontal position */
+  transform: translate(-50%, -50%);
+  font-family: Gill Sans, sans-serif;
+  text-align: center;
+  text-shadow: -1px 1px 2px #000,
+      1px 2px 6px #000,
+      1px -1px 0 #000,
+      -1px -1px 0 #000;
 }
 
 .container {
@@ -134,12 +155,12 @@ button:active {
 .maintitle1 {
   position: fixed;
   top: 200px; /* Adjust the value as needed */
-  left: 50%;
+  left: px;
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
-  font-size: 3rem;
-  font-family: Arial, sans-serif;
+  font-size: 2rem;
+  font-family: Gill Sans, sans-serif;
   color: rgb(220, 218, 218);
   text-shadow: -1px 1px 2px #000,
       1px 2px 6px #000,
@@ -149,37 +170,33 @@ button:active {
 
 .maintitle2 {
   position: fixed;
-  top: 150px; /* Adjust the value as needed */
-  left: 50%;
+  top: 300px; /* Adjust the value as needed */
+  left: 25%;
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
+  font-family: Gill Sans, sans-serif;
   font-size: 2rem;
-  font-family: Arial, sans-serif;
   color: rgb(220, 218, 218);
   text-shadow: -1px 1px 2px #000,
       1px 2px 6px #000,
       1px -1px 0 #000,
       -1px -1px 0 #000; 
 }
-
 .welcomebox {
   position: fixed;
   top: -25px;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  width: 600px;
+  width: 700px;
   height: 250px;
-  backdrop-filter: blur(25px) saturate(200%);
-    -webkit-backdrop-filter: blur(25px) saturate(200%);
-    background-color: rgba(48, 47, 47, 0.842);
-    border-radius: 15px;
+  font-family: Gill Sans, sans-serif;
 }
 
 .content {
   position: fixed;
-  top: 50%;
+  top: 550px;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -192,15 +209,14 @@ button:active {
 .welcomebox2 {
   position: fixed;
   top: 250px;
-  left: 50%;
+  left: -160px;
+  text-align: left;
   transform: translate(-50%, -50%);
   border-radius: 15px;
+  padding: 15px;
   width: 900px;
-  height: 650px;
-  backdrop-filter: blur(25px) saturate(200%);
-    -webkit-backdrop-filter: blur(25px) saturate(200%);
-    background-color: rgba(48, 47, 47, 0.842);
-    border-radius: 15px;
+  height: 350px;
+  font-family: Gill Sans, sans-serif;
 }
 
 .content2 {
@@ -210,23 +226,22 @@ button:active {
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
-  font-size: 0.7rem;
-  font-family: Arial, sans-serif;
+  font-size: 0.47rem;
+  font-family: Gill Sans, sans-serif;
   color: rgb(220, 218, 218);
 }
 
 .card2 {
     position: fixed;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
-    height: 90%;
+    width: 75%;
+    height: 75%;
     backdrop-filter: blur(25px) saturate(130%);
     -webkit-backdrop-filter: blur(25px) saturate(130%);
     background-color: rgba(54, 54, 54, 0.51);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.125);
+    border-radius: 15px;
     z-index: -1
 }
 
@@ -292,7 +307,8 @@ h2 {
 }
 .social {
   position: fixed;
-  top: 20px;
+  top: 750px;
+  font-family: Gill Sans, sans-serif;
 }
 .social ul {
   padding: 0px;
@@ -371,7 +387,7 @@ table tr:hover td {
 table td {
   backdrop-filter: blur(25px) saturate(130%);
   -webkit-backdrop-filter: blur(25px) saturate(130%);
-  background-color: rgba(48, 47, 47, 0.842);
+  background-color: rgba(136, 135, 135, 0.302);
   padding: 10px;
   font-weight: bold;
   color:rgb(220, 218, 218);

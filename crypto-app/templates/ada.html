@@ -2,11 +2,12 @@
 <html>
 <head>
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-  <title>Crypto Tracker - Cardano</title>
+  <title>Crypto Tracker - ADA</title>
   <link rel="icon" type="image/png" href="https://img.icons8.com/ios/150/cardano.png">
 </head>
 <body>
 
+<div class="card2">
   <div class="container-b">
     <div class="square-left">
       <div class="price-b">
@@ -33,15 +34,16 @@
         <h1>Cardano Price:</h1>
         <h1>{{ ada_price }}$</h1>
         <h2>__________________________________</h2>
-        <h1>Cardano Price high 24 hours:</h1>
+        <h1>Cardano Price Highest Last 24 Hours:</h1>
         <h1>{{ ada_price_h24 }}$</h1>
         <h2>__________________________________</h2>
-        <h1>Cardano Price low 24 hours:</h1>
+        <h1>Cardano Price Lowest Last 24 Hours:</h1>
         <h1>{{ ada_price_l24 }}$</h1>
         <h2>__________________________________</h2>
       </div>
     </div>
   </div>
+</div>
 
 
   <div class="button-container">
@@ -73,6 +75,10 @@
         <strong>About Myself</strong>
       </button>
     </a>
+  </div>
+
+  <div class="toptitle">
+    <h1>Crypto Tracker</h1>
   </div>
 
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
