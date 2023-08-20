@@ -185,10 +185,11 @@ button:active {
 }
 .welcomebox {
   position: fixed;
-  top: -25px;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
+  text-align: center;
   width: 700px;
   height: 250px;
   font-family: Gill Sans, sans-serif;
