@@ -117,6 +117,10 @@ def ada_price_table(name: str, price: float) -> None:
 def home_page():
     return render_template("HomePage.html")
 
+@app.route("/about")
+def home_page():
+    return render_template("About.html")
+
 @app.route("/eth")
 def eth():
     # Make a GET request to the CoinGecko API
