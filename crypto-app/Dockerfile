@@ -7,7 +7,7 @@ WORKDIR /home/roy/DevOps-Crypto
 COPY . .
 
 # install dependencies
-RUN pip install --no-cache-dir -r /home/roy/DevOps-Crypto/crypto-app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # define the port number the container should expose
 EXPOSE 5000

@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: roylatin/devops-crypto:5.24
+    image: roylatin/devops-crypto:V5
     build:
       context: .
       dockerfile: crypto-app/Dockerfile
