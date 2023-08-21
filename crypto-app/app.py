@@ -127,7 +127,7 @@ def eth():
     eth_response = requests.get("https://api.coingecko.com/api/v3/coins/ethereum")
 
     # Add a delay of 3 seconds
-    time.sleep(3)
+    time.sleep(1)
 
     # Extract the Ethereum price from the API response
     if eth_response.status_code == 200:
@@ -164,7 +164,7 @@ def btc():
     btc_response = requests.get("https://api.coingecko.com/api/v3/coins/")
 
     # Add a delay of 3 seconds
-    time.sleep(3)
+    time.sleep(1)
     
     # Extract the Bitcoin price from the API response
     if btc_response.status_code == 200:
@@ -201,7 +201,7 @@ def xrp():
     xrp_response = requests.get("https://api.coingecko.com/api/v3/coins/")
 
     # Add a delay of 3 seconds
-    time.sleep(3)
+    time.sleep(1)
     
     # Extract the xrp price from the API response
     if xrp_response.status_code == 200:
@@ -238,7 +238,7 @@ def ada():
     ada_response = requests.get("https://api.coingecko.com/api/v3/coins/")
 
     # Add a delay of 3 seconds
-    time.sleep(3)
+    time.sleep(1)
     
     # Extract the ada price from the API response
     if ada_response.status_code == 200:
