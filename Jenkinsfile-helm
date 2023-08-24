@@ -12,7 +12,7 @@ def deployKubernetesResources() {
 
 def deleteKubernetesResources() {
         // Removes all yaml files to make sure the cluster is empty
-        sh "helm uninstall crypto-helm"
+        sh "helm uninstall crypto-app"
         // Resize the GCP cluster to 0 nodes
         sh 'gcloud container clusters resize k8s-test --size=0 --zone=us-central1-c --quiet'
 }
@@ -53,10 +53,13 @@ pipeline {
                     sh 'docker rmi roylatin/devops-crypto:5.${BUILD_NUMBER} roylatin/devops-crypto:latest'
                     // Mange Helm Zip File Version, Packages It And Upload To GCP And Cleans The File From VM
                     sh "chmod +x DevOps-Crypto/scripts/helm-versions.sh"
-                    sh "./DevOps-Crypto/scripts/helm-versions.sh"   
-                    sh "helm package DevOps-Crypto/my-flask-app"
-                    sh "gsutil cp my-flask-app-0.1.${BUILD_NUMBER}.tgz gs://helm-crypto-k8s/charts/" 
-                    sh "rm my-flask-app-0.1.${BUILD_NUMBER}.tgz"    
+                    sh "./DevOps-Crypto/scripts/helm-versions.sh" 
+                    dir('DevOps-Crypto/my-flask-app'){
+                    sh "helm package ."
+                    sh "helm repo index ."
+                    sh "gsutil cp my-flask-app-0.1.${BUILD_NUMBER}.tgz gs://crypto-site-helm/"
+                    sh "gsutil cp index.yaml gs://crypto-site-helm/" 
+                    }   
             }
         }
 
