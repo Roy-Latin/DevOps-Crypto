@@ -36,9 +36,9 @@ jobs:
 
       - name: Deploy Helm Charts
         run: |
-          chmod +x DevOps-Crypto/scripts/helm-versions.sh
-          ./DevOps-Crypto/scripts/helm-versions.sh
-          cd DevOps-Crypto/my-flask-app
+          chmod +x scripts/helm-versions.sh
+          bash scripts/helm-versions.sh
+          cd my-flask-app
           helm package .
           helm repo index .
           gsutil cp my-flask-app-0.1.${BUILD_NUMBER}.tgz gs://crypto-site-helm/
@@ -48,25 +48,28 @@ jobs:
         run: |
           gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
           gcloud container clusters resize k8s-test --size=1 --zone=us-central1-c --quiet
-          kubectl apply -f DevOps-Crypto/k8s/
+          helm repo update
+          chmod +x scripts/helm-status.sh
+          bash scripts/helm-status.sh
         continue-on-error: true
 
       - name: Run Tests
         run: |
-          chmod +x DevOps-Crypto/scripts/k8s-tests.sh
-          bash DevOps-Crypto/scripts/k8s-tests.sh
+          chmod +x scripts/k8s-tests.sh
+          bash scripts/k8s-tests.sh
         continue-on-error: true
 
       - name: Delete Test Cluster
         run: |
           gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
-          kubectl delete -f DevOps-Crypto/k8s/
+          helm uninstall crypto-app
 
       - name: Deploy to Prod Cluster
         run: |
           gcloud container clusters get-credentials k8s-deploy --project onyx-seeker-393207 --region us-central1-c
           gcloud container clusters resize k8s-deploy --size=1 --zone=us-central1-c --quiet
-          kubectl apply -f DevOps-Crypto/k8s/
+          chmod +x scripts/helm-status.sh
+          bash scripts/helm-status.sh
         continue-on-error: true
 
       - name: Get Cluster IP
