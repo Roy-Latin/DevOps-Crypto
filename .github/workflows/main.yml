@@ -1,0 +1,72 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-docker@v2
+
+      - name: Build and Push Docker image
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: |
+          docker build -t roylatin/devops-crypto:5.${BUILD_NUMBER} -t roylatin/devops-crypto:latest DevOps-Crypto/crypto-app/
+          docker push roylatin/devops-crypto:5.${BUILD_NUMBER}
+          docker push roylatin/devops-crypto:latest
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          project_id: onyx-seeker-393207
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Deploy Helm Charts
+        run: |
+          chmod +x DevOps-Crypto/scripts/helm-versions.sh
+          ./DevOps-Crypto/scripts/helm-versions.sh
+          cd DevOps-Crypto/my-flask-app
+          helm package .
+          helm repo index .
+          gsutil cp my-flask-app-0.1.${BUILD_NUMBER}.tgz gs://crypto-site-helm/
+          gsutil cp index.yaml gs://crypto-site-helm/
+
+      - name: Deploy to Test Cluster
+        run: |
+          gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
+          gcloud container clusters resize k8s-test --size=1 --zone=us-central1-c --quiet
+          kubectl apply -f DevOps-Crypto/k8s/
+        continue-on-error: true
+
+      - name: Run Tests
+        run: |
+          chmod +x DevOps-Crypto/scripts/k8s-tests.sh
+          bash DevOps-Crypto/scripts/k8s-tests.sh
+        continue-on-error: true
+
+      - name: Delete Test Cluster
+        run: |
+          gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
+          kubectl delete -f DevOps-Crypto/k8s/
+
+      - name: Deploy to Prod Cluster
+        run: |
+          gcloud container clusters get-credentials k8s-deploy --project onyx-seeker-393207 --region us-central1-c
+          gcloud container clusters resize k8s-deploy --size=1 --zone=us-central1-c --quiet
+          kubectl apply -f DevOps-Crypto/k8s/
+        continue-on-error: true
+
+      - name: Get Cluster IP
+        run: |
+          chmod +x DevOps-Crypto/scripts/Load-Balancer-IP.sh
+          bash DevOps-Crypto/scripts/Load-Balancer-IP.sh
