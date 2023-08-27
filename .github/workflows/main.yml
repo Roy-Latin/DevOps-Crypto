@@ -23,7 +23,7 @@ jobs:
         env:
           BUILD_NUMBER: ${{ github.run_number }}
         run: |
-          docker build -t roylatin/devops-crypto:5.${BUILD_NUMBER} -t roylatin/devops-crypto:latest DevOps-Crypto/crypto-app/
+          docker build -t roylatin/devops-crypto:5.${BUILD_NUMBER} -t roylatin/devops-crypto:latest crypto-app/
           docker push roylatin/devops-crypto:5.${BUILD_NUMBER}
           docker push roylatin/devops-crypto:latest
 
