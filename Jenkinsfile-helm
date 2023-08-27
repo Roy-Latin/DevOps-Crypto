@@ -45,15 +45,15 @@ pipeline {
                     // Creates Docker Image
                     dir('DevOps-Crypto'){
                     sh 'docker build -t roylatin/devops-crypto:5.${BUILD_NUMBER} -t roylatin/devops-crypto:latest crypto-app/'
-                    }
                     // Pushes Docker Image To Docker Hub - creates a image with a build number and latest
                     sh 'docker push roylatin/devops-crypto:5.${BUILD_NUMBER}'
                     sh 'docker push roylatin/devops-crypto:latest'
                     // Cleanup Docker images
                     sh 'docker rmi roylatin/devops-crypto:5.${BUILD_NUMBER} roylatin/devops-crypto:latest'
                     // Mange Helm Zip File Version, Packages It And Upload To GCP And Cleans The File From VM
-                    sh "chmod +x DevOps-Crypto/scripts/helm-versions.sh"
-                    sh "./DevOps-Crypto/scripts/helm-versions.sh" 
+                    sh "chmod +x scripts/helm-versions.sh"
+                    sh "bash scripts/helm-versions.sh" 
+                    }
                     dir('DevOps-Crypto/my-flask-app'){
                     sh "helm package ."
                     sh "helm repo index ."
