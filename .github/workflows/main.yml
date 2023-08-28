@@ -42,6 +42,11 @@ jobs:
           helm repo index .
           gsutil cp my-flask-app-0.1.${env.BUILD_NUMBER}.tgz gs://crypto-site-helm/
           gsutil cp index.yaml gs://crypto-site-helm/
+        env:
+          CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
+          GCLOUD_PROJECT: onyx-seeker-393207
+          GOOGLE_APPLICATION_CREDENTIALS: /home/runner/work/DevOps-Crypto/DevOps-Crypto/81d3fec0-70d2-41c0-a245-203afff77ee4
+        
 
       - name: Deploy to Test Cluster
         run: |
