@@ -58,7 +58,7 @@ jobs:
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           helm upgrade --install crypto-app crypto-site-helm/my-flask-app
-          bash script/Gcloud-status.sh 
+          bash scripts/Gcloud-status.sh 
         continue-on-error: false
 
       - name: Run Tests
@@ -80,7 +80,7 @@ jobs:
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           helm upgrade --install crypto-app crypto-site-helm/my-flask-app
-          bash script/Gcloud-status.sh
+          bash scripts/Gcloud-status.sh
         continue-on-error: true
 
       - name: Get Cluster IP
