@@ -36,11 +36,11 @@ jobs:
 
       - name: Deploy Helm Charts
         run: |
-          sed -i "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: 0.1.${env.BUILD_NUMBER}/g" my-flask-app/Chart.yaml
+          sed -i "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: 0.1.0${BUILD_NUMBER}/g" my-flask-app/Chart.yaml
           cd my-flask-app
           helm package .
           helm repo index .
-          gsutil cp my-flask-app-0.1.${env.BUILD_NUMBER}.tgz gs://crypto-site-helm/
+          gsutil cp my-flask-app-0.1.0${BUILD_NUMBER}.tgz gs://crypto-site-helm/
           gsutil cp index.yaml gs://crypto-site-helm/
         env:
           CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
