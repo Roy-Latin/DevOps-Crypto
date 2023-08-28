@@ -36,11 +36,11 @@ jobs:
 
       - name: Deploy Helm Charts
         run: |
-          sed -i "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: 0.1.0${BUILD_NUMBER}/g" my-flask-app/Chart.yaml
+          sed -i "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: 0.1.${{github.run_number}}/g" my-flask-app/Chart.yaml
           cd my-flask-app
           helm package .
           helm repo index .
-          gsutil cp my-flask-app-0.1.0${BUILD_NUMBER}.tgz gs://crypto-site-helm/
+          gsutil cp my-flask-app-0.1.${{github.run_number}}.tgz gs://crypto-site-helm/
           gsutil cp index.yaml gs://crypto-site-helm/
         env:
           CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
@@ -52,6 +52,7 @@ jobs:
         run: |
           gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
           gcloud container clusters resize k8s-test --size=1 --zone=us-central1-c --quiet
+          helm repo add crypto-app gs://crypto-site-helm/
           helm repo update
           chmod +x scripts/helm-status.sh
           bash scripts/helm-status.sh
