@@ -58,7 +58,7 @@ jobs:
           gcloud container clusters resize k8s-test --size=1 --zone=us-central1-c --quiet
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
-          helm upgrade --install crypto-app crypto-site-helm/my-flask-app
+          helm upgrade -i --install crypto-app crypto-site-helm/my-flask-app
           bash scripts/Gcloud-status.sh 
         continue-on-error: false
 
@@ -80,7 +80,7 @@ jobs:
           gcloud container clusters resize k8s-deploy --size=1 --zone=us-central1-c --quiet
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
-          helm upgrade --install crypto-app crypto-site-helm/my-flask-app
+          helm upgrade -i --recreate-pods crypto-app crypto-site-helm/my-flask-app
           bash scripts/Gcloud-status.sh
         continue-on-error: true
 
