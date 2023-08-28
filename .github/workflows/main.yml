@@ -36,8 +36,8 @@ jobs:
 
       - name: Deploy Helm Charts
         run: |
-          chmod +x scripts\gitactions-helm-version.sh
-          bash scripts\gitactions-helm-version.sh
+          chmod +x scripts/gitactions-helm-version.sh
+          bash scripts/gitactions-helm-version.sh
           cd my-flask-app
           helm package .
           helm repo index .
