@@ -49,11 +49,20 @@ jobs:
         
 
       - name: Deploy to Test Cluster
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
         run: |
           gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
           gcloud container clusters resize k8s-test --size=1 --zone=us-central1-c --quiet
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
+
+          # Configure kubectl using gcloud credentials
+          gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+          gcloud --quiet config set project onyx-seeker-393207
+          gcloud --quiet config set compute/zone us-central1-c
+          gcloud --quiet container clusters get-credentials k8s-test --region us-central1-c
+
           chmod +x scripts/helm-status.sh
           bash scripts/helm-status.sh
         continue-on-error: false
