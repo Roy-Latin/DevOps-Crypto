@@ -36,8 +36,7 @@ jobs:
 
       - name: Deploy Helm Charts
         run: |
-          chmod +x scripts/gitactions-helm-version.sh
-          bash scripts/gitactions-helm-version.sh
+          sed -i "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: 0.1.$BUILD_NUMBER/g" my-flask-app/Chart.yaml
           cd my-flask-app
           helm package .
           helm repo index .
