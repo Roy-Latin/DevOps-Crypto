@@ -52,7 +52,7 @@ jobs:
         run: |
           gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
           gcloud container clusters resize k8s-test --size=1 --zone=us-central1-c --quiet
-          helm repo add crypto-app gs://crypto-site-helm/
+          helm repo add crypto-app https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           chmod +x scripts/helm-status.sh
           bash scripts/helm-status.sh
