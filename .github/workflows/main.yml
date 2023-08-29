@@ -27,14 +27,14 @@ jobs:
           docker push roylatin/devops-crypto:5.${BUILD_NUMBER}
           docker push roylatin/devops-crypto:latest
 
-      - name: Setup gcloud
+      - name: Setup Gcloud
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
           project_id: onyx-seeker-393207
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      - name: Deploy Helm Charts
+      - name: Upload Helm To Gcloud Bucket
         run: |
           bash scripts/bucket-clean.sh
           sed -i "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: 0.1.${{github.run_number}}/g" my-flask-app/Chart.yaml
@@ -54,7 +54,7 @@ jobs:
     needs: Build
 
     steps:
-      - name: Setup gcloud
+      - name: Setup Gcloud
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
           project_id: onyx-seeker-393207
@@ -69,12 +69,12 @@ jobs:
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           helm upgrade -i --install crypto-app crypto-site-helm/my-flask-app
-          bash scripts/Gcloud-status.sh 
+          bash DevOps-Crypto/scripts/Gcloud-status.sh 
         continue-on-error: false
 
       - name: Run Tests
         run: |
-          bash scripts/k8s-tests.sh
+          bash DevOps-Crypto/scripts/k8s-tests.sh
         continue-on-error: false
 
       - name: Delete Test Cluster
@@ -88,7 +88,7 @@ jobs:
     needs: Test
 
     steps:
-      - name: Setup gcloud
+      - name: Setup Gcloud
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
           project_id: onyx-seeker-393207
@@ -103,9 +103,9 @@ jobs:
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           helm upgrade -i --recreate-pods crypto-app crypto-site-helm/my-flask-app
-          bash scripts/Gcloud-status.sh
+          bash DevOps-Crypto/Gcloud-status.sh
         continue-on-error: true
 
       - name: Get Cluster IP
         run: |
-          bash scripts/Load-Balancer-IP.sh
+          bash DevOps-Crypto/scripts/Load-Balancer-IP.sh
