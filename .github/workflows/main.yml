@@ -61,6 +61,10 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
+      - name: Git Clone
+        run: |
+          git clone https://github.com/Roy-Latin/DevOps-Crypto.git
+
       - name: Deploy to Test Cluster
         run: |
           gcloud components install gke-gcloud-auth-plugin
@@ -69,13 +73,12 @@ jobs:
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           helm upgrade -i --install crypto-app crypto-site-helm/my-flask-app
-          ls
-          bash scripts/Gcloud-status.sh
+          bash Devops-Crypto/scripts/Gcloud-status.sh
         continue-on-error: false
 
       - name: Run Tests
         run: |
-          bash scripts/k8s-tests.sh
+          bash DevOps-Crypto/scripts/k8s-tests.sh
         continue-on-error: false
 
       - name: Delete Test Cluster
@@ -96,6 +99,11 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
+      - name: Git Clone
+        run: |
+          git clone https://github.com/Roy-Latin/DevOps-Crypto.git
+  
+
       - name: Deploy to Prod Cluster
         run: |
           gcloud components install gke-gcloud-auth-plugin
@@ -104,9 +112,9 @@ jobs:
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           helm upgrade -i --recreate-pods crypto-app crypto-site-helm/my-flask-app
-          bash scripts/Gcloud-status.sh
+          bash DevOps-Crypto/scripts/Gcloud-status.sh
         continue-on-error: true
 
       - name: Get Cluster IP
         run: |
-          bash scripts/Load-Balancer-IP.sh
+          bash DevOps-Crypto/scripts/Load-Balancer-IP.sh
