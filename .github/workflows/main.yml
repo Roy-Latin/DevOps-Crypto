@@ -69,12 +69,12 @@ jobs:
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           helm upgrade -i --install crypto-app crypto-site-helm/my-flask-app
-          bash DevOps-Crypto/scripts/Gcloud-status.sh 
+          bash scripts/Gcloud-status.sh 
         continue-on-error: false
 
       - name: Run Tests
         run: |
-          bash DevOps-Crypto/scripts/k8s-tests.sh
+          bash scripts/k8s-tests.sh
         continue-on-error: false
 
       - name: Delete Test Cluster
@@ -103,9 +103,9 @@ jobs:
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           helm upgrade -i --recreate-pods crypto-app crypto-site-helm/my-flask-app
-          bash DevOps-Crypto/Gcloud-status.sh
+          bash scripts/Gcloud-status.sh
         continue-on-error: true
 
       - name: Get Cluster IP
         run: |
-          bash DevOps-Crypto/scripts/Load-Balancer-IP.sh
+          bash scripts/Load-Balancer-IP.sh
