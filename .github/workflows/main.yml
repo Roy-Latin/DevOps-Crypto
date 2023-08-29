@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  Build:
     runs-on: ubuntu-latest
 
     steps:
@@ -49,9 +49,18 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: /home/runner/work/DevOps-Crypto/DevOps-Crypto/81d3fec0-70d2-41c0-a245-203afff77ee4
         
 
+  Test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          project_id: onyx-seeker-393207
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
       - name: Deploy to Test Cluster
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
         run: |
           gcloud components install gke-gcloud-auth-plugin
           gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
@@ -72,6 +81,17 @@ jobs:
           gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
           helm uninstall crypto-app
           gcloud container clusters resize k8s-test --size=0 --zone=us-central1-c --quiet
+
+  Production:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          project_id: onyx-seeker-393207
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
 
       - name: Deploy to Prod Cluster
         run: |
