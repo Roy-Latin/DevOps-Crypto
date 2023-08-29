@@ -73,7 +73,7 @@ jobs:
           helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
           helm repo update
           helm upgrade -i --install crypto-app crypto-site-helm/my-flask-app
-          bash Devops-Crypto/scripts/Gcloud-status.sh
+          bash DevOps-Crypto/scripts/Gcloud-status.sh
         continue-on-error: false
 
       - name: Run Tests
