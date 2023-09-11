@@ -424,10 +424,6 @@ button:hover{
   display: none;
 }
 
-button:active{
-  display: none;
-}
-
 .toptitle {
   display: flex;
   align-items: center;
