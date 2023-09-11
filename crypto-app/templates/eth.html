@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
   <title>Crypto Tracker - ETH</title>
   <link rel="icon" type="image/png" href="https://img.icons8.com/pastel-glyph/128/ethereum--v2.png">
@@ -22,6 +23,22 @@
               <td>{{ row[0] }}</td>
               <td>{{ row[1] }}</td>
           </tr>
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+        </tr>
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+      </tr>
+      <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+    </tr>
+    <tr>
+      <td>{{ row[0] }}</td>
+      <td>{{ row[1] }}</td>
+  </tr>
           {% endfor %}
       </table>
       </div>
