@@ -420,6 +420,14 @@ button {
   box-shadow: inset 0 0 0 0 #725AC1;
 }
 
+button:hover{
+  display: none;
+}
+
+button:active{
+  display: none;
+}
+
 .toptitle {
   display: flex;
   align-items: center;
