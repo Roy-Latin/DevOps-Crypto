@@ -413,15 +413,13 @@ button {
   font-family: Gill Sans, sans-serif;
   color: rgb(220, 218, 218);
   background: transparent;
-  cursor: pointer;
-  transition: ease-out 0.5s;
   border: 2px solid #725AC1;
-  border-radius: 10px;
-  box-shadow: inset 0 0 0 0 #725AC1;
+  border-radius: 15px;
 }
 
-button:hover{
-  display: none;
+button:hover {
+  color: white;
+  box-shadow: none;
 }
 
 .toptitle {
