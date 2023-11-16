@@ -43,10 +43,6 @@ jobs:
           helm repo index .
           gsutil cp my-flask-app-0.1.${{github.run_number}}.tgz gs://roys-crypto-site/
           gsutil cp index.yaml gs://roys-crypto-site/
-        env:
-          CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
-          GCLOUD_PROJECT: graceful-mile-405310
-          GOOGLE_APPLICATION_CREDENTIALS: /home/runner/work/DevOps-Crypto/DevOps-Crypto/81d3fec0-70d2-41c0-a245-203afff77ee4
         
 
   Test:
