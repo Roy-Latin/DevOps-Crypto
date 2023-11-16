@@ -30,7 +30,7 @@ jobs:
       - name: Setup Gcloud
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
-          project_id: onyx-seeker-393207
+          project_id: graceful-mile-405310
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
@@ -41,11 +41,11 @@ jobs:
           cd my-flask-app
           helm package .
           helm repo index .
-          gsutil cp my-flask-app-0.1.${{github.run_number}}.tgz gs://crypto-site-helm/
-          gsutil cp index.yaml gs://crypto-site-helm/
+          gsutil cp my-flask-app-0.1.${{github.run_number}}.tgz gs://roys-crypto-site/
+          gsutil cp index.yaml gs://roys-crypto-site/
         env:
           CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
-          GCLOUD_PROJECT: onyx-seeker-393207
+          GCLOUD_PROJECT: graceful-mile-405310
           GOOGLE_APPLICATION_CREDENTIALS: /home/runner/work/DevOps-Crypto/DevOps-Crypto/81d3fec0-70d2-41c0-a245-203afff77ee4
         
 
@@ -57,7 +57,7 @@ jobs:
       - name: Setup Gcloud
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
-          project_id: onyx-seeker-393207
+          project_id: graceful-mile-405310
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
@@ -68,9 +68,9 @@ jobs:
       - name: Deploy to Test Cluster
         run: |
           gcloud components install gke-gcloud-auth-plugin
-          gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
+          gcloud container clusters get-credentials k8s-test --project graceful-mile-405310 --region us-central1-c
           gcloud container clusters resize k8s-test --size=1 --zone=us-central1-c --quiet
-          helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
+          helm repo add crypto-site-helm https://storage.googleapis.com/roys-crypto-site/
           helm repo update
           helm upgrade -i --install crypto-app crypto-site-helm/my-flask-app
           bash DevOps-Crypto/scripts/Gcloud-status.sh
@@ -83,7 +83,7 @@ jobs:
 
       - name: Delete Test Cluster
         run: |
-          gcloud container clusters get-credentials k8s-test --project onyx-seeker-393207 --region us-central1-c
+          gcloud container clusters get-credentials k8s-test --project graceful-mile-405310 --region us-central1-c
           helm uninstall crypto-app
           gcloud container clusters resize k8s-test --size=0 --zone=us-central1-c --quiet
 
@@ -95,7 +95,7 @@ jobs:
       - name: Setup Gcloud
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
-          project_id: onyx-seeker-393207
+          project_id: graceful-mile-405310
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
@@ -107,9 +107,9 @@ jobs:
       - name: Deploy to Prod Cluster
         run: |
           gcloud components install gke-gcloud-auth-plugin
-          gcloud container clusters get-credentials k8s-deploy --project onyx-seeker-393207 --region us-central1-c
+          gcloud container clusters get-credentials k8s-deploy --project graceful-mile-405310 --region us-central1-c
           gcloud container clusters resize k8s-deploy --size=1 --zone=us-central1-c --quiet
-          helm repo add crypto-site-helm https://storage.googleapis.com/crypto-site-helm/
+          helm repo add crypto-site-helm https://storage.googleapis.com/roys-crypto-site/
           helm repo update
           helm upgrade -i --recreate-pods crypto-app crypto-site-helm/my-flask-app
           bash DevOps-Crypto/scripts/Gcloud-status.sh
