@@ -68,7 +68,7 @@ code {
   text-align: center;
   font-size: 2rem;
   font-family: Gill Sans, sans-serif;
-  border-radius: 15px;
+  border-radius: 10px;
   height: 550px;
   overflow-y: scroll; 
 }
@@ -392,4 +392,176 @@ table td {
   padding: 10px;
   font-weight: bold;
   color:rgb(220, 218, 218);
+}
+
+@media screen and (max-width: 600px)
+{
+  body {
+  background-size: auto;
+  background-image: url('https://images.hdqwalls.com/download/gradient-noise-8k-ws-3840x2400.jpg');
+  background-color: #341B3A;
+  color:rgb(240, 240, 240)
+}
+
+button {
+  width: 65px; /* set a fixed width */
+  height: 50px; /* set a fixed height */
+  position: relative;
+  top: 90px;
+  margin: 3px;
+  text-align: center;
+  font-size: 10px;
+  font-family: Gill Sans, sans-serif;
+  color: rgb(220, 218, 218);
+  background: transparent;
+  border: 2px solid #725AC1;
+  border-radius: 15px;
+}
+
+button:hover {
+  color: white;
+  box-shadow: none;
+}
+
+.toptitle {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  font-size: 10px;
+  top: 20px; /* Adjust the vertical position */
+  left: 50%; /* Adjust the horizontal position */
+  transform: translate(-50%, -50%);
+  font-family: Gill Sans, sans-serif;
+  text-align: center;
+  text-shadow: -1px 1px 2px #000,
+      1px 2px 6px #000,
+      1px -1px 0 #000,
+      -1px -1px 0 #000;
+}
+
+.button-container {
+  position: fixed;
+  padding: 4px;
+  top: 40px; /* Adjust the vertical position */
+  left: 40%; /* Adjust the horizontal position */
+  width: 10000px;
+  height: 150px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  backdrop-filter: blur(25px) saturate(130%);
+    -webkit-backdrop-filter: blur(25px) saturate(130%);
+    background-color: rgba(54, 54, 54, 0.51);
+    border-radius: 15px;
+}
+
+.button2-container {
+  display: flex;
+  top: -7px; /* Adjust the vertical position */
+  left: 90%; /* Adjust the horizontal position */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: Gill Sans, sans-serif;
+}
+
+.welcomebox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  font-size: small;
+  text-align: center;
+  width: 250px;
+  height: 70%;
+  font-family: Gill Sans, sans-serif;
+}
+
+.maintitle2 {
+  position: fixed;
+  top: 3%; /* Adjust the value as needed */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  font-family: Gill Sans, sans-serif;
+  font-size: 10px;
+  color: rgb(220, 218, 218);
+  text-shadow: -1px 1px 2px #000,
+      1px 2px 6px #000,
+      1px -1px 0 #000,
+      -1px -1px 0 #000; 
+}
+
+.welcomebox2 {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  width: 270px;
+  height: px;
+  font-size: 0.35rem;
+  font-family: Gill Sans, sans-serif;
+}
+
+.card2 {
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 75%;
+    backdrop-filter: blur(25px) saturate(130%);
+    -webkit-backdrop-filter: blur(25px) saturate(130%);
+    background-color: rgba(54, 54, 54, 0.51);
+    border-radius: 15px;
+    z-index: -1
+}
+
+.square-right {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  width: 300px;
+  height: 450px;
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  background-color: rgba(136, 135, 135, 0.302);
+  border-radius: 15px;
+}
+
+.price-a {
+  position: fixed;
+  top: 48%;
+  left: 50%;
+  font-size: 10px;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  font-family: Gill Sans, sans-serif;
+  color: rgb(220, 218, 218);
+}
+
+.square-left {
+   display: none;
+}
+
+
+.price-b {
+ display: none;
+}
+
+table {
+    display: none;
+  }
+
+
+
+
+.social {
+  display: none;
+}
+
 }
