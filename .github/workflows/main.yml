@@ -41,8 +41,8 @@ jobs:
           cd my-flask-app
           helm package .
           helm repo index .
-          gsutil cp my-flask-app-0.1.${{github.run_number}}.tgz gs://roys-crypto-site/
-          gsutil cp index.yaml gs://roys-crypto-site/
+          gsutil cp my-flask-app-0.1.${{github.run_number}}.tgz gs://roys-crypto-site
+          gsutil cp index.yaml gs://roys-crypto-site
         
 
   Test:
