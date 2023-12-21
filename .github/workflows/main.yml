@@ -100,7 +100,7 @@ jobs:
           git clone https://github.com/Roy-Latin/DevOps-Crypto.git
   
 
-      - name: Deploy to Prod Cluster
+      - name: Deploy To Prod Cluster
         run: |
           gcloud components install gke-gcloud-auth-plugin
           gcloud container clusters get-credentials k8s-deploy --project graceful-mile-405310 --region us-central1-c
