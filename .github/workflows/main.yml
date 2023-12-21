@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Docker image
+      - name: Build And Push Docker Image
         env:
           BUILD_NUMBER: ${{ github.run_number }}
         run: |
