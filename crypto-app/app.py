@@ -123,8 +123,12 @@ def about():
 
 @app.route("/eth")
 def eth():
-    # Make a GET request to the CoinGecko API
-    eth_response = requests.get("https://api.coingecko.com/api/v3/coins/ethereum")
+
+    # Your CoinGecko API key
+    api_key = "CG-78XSv7ysvEVFTxRSKjCgN5EP"
+
+    # Make a GET request to the CoinGecko API with key
+    eth_response = requests.get("https://api.coingecko.com/api/v3/coins/ethereum", headers={"Authorization": f"Apikey {api_key}"})
 
     # Add a delay of 3 seconds
     time.sleep(1)
