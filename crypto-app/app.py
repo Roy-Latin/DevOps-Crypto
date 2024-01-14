@@ -161,7 +161,7 @@ def eth():
 @app.route("/btc")
 def btc():
     # Make a GET request to the CoinDesk API
-    btc_response = requests.get("https://api.coingecko.com/api/v3/coins/")
+    btc_response = requests.get("https://api.coingecko.com/api/v3/coins/bitcoin")
 
     # Add a delay of 3 seconds
     time.sleep(1)
@@ -169,9 +169,9 @@ def btc():
     # Extract the Bitcoin price from the API response
     if btc_response.status_code == 200:
         btc_data = btc_response.json()
-        bitcoin_price = btc_data[0]["market_data"]["current_price"]["usd"]
-        bitcoin_price_h24 = btc_data[0]["market_data"]["high_24h"]["usd"]
-        bitcoin_price_l24 = btc_data[0]["market_data"]["low_24h"]["usd"]
+        bitcoin_price = btc_data["market_data"]["current_price"]["usd"]
+        bitcoin_price_h24 = btc_data["market_data"]["high_24h"]["usd"]
+        bitcoin_price_l24 = btc_data["market_data"]["low_24h"]["usd"]
 
     # Update the price_table with the Ethereum price data
     btc_price_table("Bitcoin", bitcoin_price)
@@ -198,7 +198,7 @@ def btc():
 @app.route("/xrp")
 def xrp():
     # Make a GET request to the CoinDesk API
-    xrp_response = requests.get("https://api.coingecko.com/api/v3/coins/")
+    xrp_response = requests.get("https://api.coingecko.com/api/v3/coins/ripple")
 
     # Add a delay of 3 seconds
     time.sleep(1)
@@ -206,9 +206,9 @@ def xrp():
     # Extract the xrp price from the API response
     if xrp_response.status_code == 200:
         xrp_data = xrp_response.json()
-        xrp_price = xrp_data[4]["market_data"]["current_price"]["usd"]
-        xrp_price_h24 = xrp_data[4]["market_data"]["high_24h"]["usd"]
-        xrp_price_l24 = xrp_data[4]["market_data"]["low_24h"]["usd"]
+        xrp_price = xrp_data["market_data"]["current_price"]["usd"]
+        xrp_price_h24 = xrp_data["market_data"]["high_24h"]["usd"]
+        xrp_price_l24 = xrp_data["market_data"]["low_24h"]["usd"]
 
     # Update the price_table with the Ethereum price data
     xrp_price_table("Ripple", xrp_price)
@@ -235,7 +235,7 @@ def xrp():
 @app.route("/ada")
 def ada():
     # Make a GET request to the CoinDesk API
-    ada_response = requests.get("https://api.coingecko.com/api/v3/coins/")
+    ada_response = requests.get("https://api.coingecko.com/api/v3/coins/cardano")
 
     # Add a delay of 3 seconds
     time.sleep(1)
@@ -243,9 +243,9 @@ def ada():
     # Extract the ada price from the API response
     if ada_response.status_code == 200:
         ada_data = ada_response.json()
-        ada_price = ada_data[7]["market_data"]["current_price"]["usd"]
-        ada_price_h24 = ada_data[7]["market_data"]["high_24h"]["usd"]
-        ada_price_l24 = ada_data[7]["market_data"]["low_24h"]["usd"]
+        ada_price = ada_data["market_data"]["current_price"]["usd"]
+        ada_price_h24 = ada_data["market_data"]["high_24h"]["usd"]
+        ada_price_l24 = ada_data["market_data"]["low_24h"]["usd"]
 
     # Update the price_table with the Ethereum price data
     ada_price_table("Cardano", ada_price)
