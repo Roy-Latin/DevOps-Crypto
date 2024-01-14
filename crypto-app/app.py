@@ -164,8 +164,12 @@ def eth():
 
 @app.route("/btc")
 def btc():
-    # Make a GET request to the CoinDesk API
-    btc_response = requests.get("https://api.coingecko.com/api/v3/coins/bitcoin")
+
+    # Your CoinGecko API key
+    api_key = "CG-78XSv7ysvEVFTxRSKjCgN5EP"
+
+    # Make a GET request to the CoinGecko API with key
+    btc_response = requests.get("https://api.coingecko.com/api/v3/coins/bitcoin", headers={"Authorization": f"Apikey {api_key}"})
 
     # Add a delay of 3 seconds
     time.sleep(1)
@@ -201,8 +205,12 @@ def btc():
 
 @app.route("/xrp")
 def xrp():
-    # Make a GET request to the CoinDesk API
-    xrp_response = requests.get("https://api.coingecko.com/api/v3/coins/ripple")
+
+    # Your CoinGecko API key
+    api_key = "CG-78XSv7ysvEVFTxRSKjCgN5EP"
+
+    # Make a GET request to the CoinGecko API with key
+    xrp_response = requests.get("https://api.coingecko.com/api/v3/coins/ripple", headers={"Authorization": f"Apikey {api_key}"})
 
     # Add a delay of 3 seconds
     time.sleep(1)
@@ -238,8 +246,12 @@ def xrp():
 
 @app.route("/ada")
 def ada():
-    # Make a GET request to the CoinDesk API
-    ada_response = requests.get("https://api.coingecko.com/api/v3/coins/cardano")
+
+    # Your CoinGecko API key
+    api_key = "CG-78XSv7ysvEVFTxRSKjCgN5EP"
+
+    # Make a GET request to the CoinGecko API with key
+    ada_response = requests.get("https://api.coingecko.com/api/v3/coins/cardano", headers={"Authorization": f"Apikey {api_key}"})
 
     # Add a delay of 3 seconds
     time.sleep(1)
